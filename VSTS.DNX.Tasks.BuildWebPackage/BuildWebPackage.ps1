@@ -29,6 +29,8 @@ Function Main
 
     $isPublishSource = [System.Convert]::ToBoolean($PublishSource)
 
+    $OutputFolder = $OutputFolder.Trim('"')
+
     Import-Module "$(Split-Path -parent $PSCommandPath)\InstallDNVM.psm1"
 
     Install-DNVM
@@ -47,12 +49,11 @@ Function Main
         $projectList = $projects | % {""".\src\$($_.Trim('"'))""" } | & {"$input"}
         Invoke-Expression "& dnu restore $projectList --no-cache"
 
-        Invoke-Expression "dnu build $projectList --configuration $BuildConfiguration"
+        build($projectList)
 
         foreach($project in $projects)
         {
             $p = ".\src\$($project.Trim('"'))"
-            build($p)
             publish($p)
         }
     }
@@ -65,8 +66,8 @@ Function Main
 
         dir -Path .\src\*\* -Filter project.json | % {
             $p = $_.Directory.FullName
-            build($p)
-            publish($p)
+            build("""$p""")
+            publish("""$p""")
         }
     }
 }
@@ -74,8 +75,8 @@ Function Main
 Function build($project)
 {
     Write-Output "dnu build for:"
-    Write-Output "    $project"
-    Invoke-Expression "& dnu build ""$project"" --configuration $BuildConfiguration"
+    Write-Output $($project -split(" ") | % { "    $_" })
+    Invoke-Expression "& dnu build $project --configuration $BuildConfiguration"
 }
 
 Function publish($project)
@@ -84,9 +85,8 @@ Function publish($project)
     $noSource = &{If(!$isPublishSource){"--no-source"}}
 
     Write-Output "dnu publish for:"
-    Write-Output "    $project"
-    Write-Output "& dnu publish ""$project"" --configuration $BuildConfiguration --out ""$OutputFolder\$outDir"" --runtime active $noSource"
-    Invoke-Expression "& dnu publish ""$project"" --configuration $BuildConfiguration --out ""$OutputFolder\$outDir"" --runtime active $noSource"
+    Write-Output $($project -split(" ") | % { "    $_" })
+    Invoke-Expression "& dnu publish $project --configuration $BuildConfiguration --out ""$OutputFolder\$outDir"" --runtime active $noSource"
 }
 
 Main
