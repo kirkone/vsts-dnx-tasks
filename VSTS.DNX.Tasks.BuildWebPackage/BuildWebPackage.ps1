@@ -39,36 +39,31 @@ Function Main
 
     $projects = $ProjectName.Trim() -split(" ");
 
-    if(![string]::IsNullOrWhiteSpace($projectNames) -And $projects.Length -gt 0 )
-    {
-        Write-Output "$($projects.Length) Projects to build"
+    Write-Output "blubb $projects"
+    Write-Output $(-Not [string]::IsNullOrWhiteSpace($ProjectName))
 
-        Write-Output "dnu restore for:"
-        Write-Output $projects | % {"    "".\src\$($_.Trim('"'))""" }
-
-        $projectList = $projects | % {""".\src\$($_.Trim('"'))""" } | & {"$input"}
-        Invoke-Expression "& dnu restore $projectList --no-cache"
-
-        build($projectList)
-
-        foreach($project in $projects)
-        {
-            $p = ".\src\$($project.Trim('"'))"
-            publish($p)
-        }
-    }
-    else
+    if([string]::IsNullOrWhiteSpace($ProjectName) -Or $projects.Length -eq 0 )
     {
         Write-Output "No Projects specified, build all..."
+        $projects = dir -Path .\src\*\* -Filter project.json | % {
+            $_.Directory.Name
+        } | & {$input}
+    }
 
-        Write-Output "dnu restore"
-        Invoke-Expression "& dnu restore .\src"
+    Write-Output "$($projects.Length) Projects to build"
 
-        dir -Path .\src\*\* -Filter project.json | % {
-            $p = $_.Directory.FullName
-            build("""$p""")
-            publish("""$p""")
-        }
+    Write-Output "dnu restore for:"
+    Write-Output $projects | % {"    "".\src\$($_.Trim('"'))""" }
+
+    $projectList = $projects | % {""".\src\$($_.Trim('"'))""" } | & {"$input"}
+    Invoke-Expression "& dnu restore $projectList --no-cache"
+
+    build($projectList)
+
+    foreach($project in $projects)
+    {
+        $p = ".\src\$($project.Trim('"'))"
+        publish($p)
     }
 }
 
