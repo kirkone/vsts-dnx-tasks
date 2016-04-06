@@ -3,13 +3,13 @@
     "name": "DNX.Tasks.BuildWebPackage",
     "friendlyName": "DNX Tasks Build Web Package",
     "description": "Build a package with dnx for Deployment",
-    "helpMarkDown": "(todo)",
+    "helpMarkDown": "Version 0.0.7",
     "category": "Build",
     "author": "Kirsten Kluge",
     "version": {
         "Major": 0,
         "Minor": 0,
-        "Patch": 4
+        "Patch": 7
     },
     "visibility": [
         "Build"

@@ -39,9 +39,6 @@ Function Main
 
     $projects = $ProjectName.Trim() -split(" ");
 
-    Write-Output "blubb $projects"
-    Write-Output $(-Not [string]::IsNullOrWhiteSpace($ProjectName))
-
     if([string]::IsNullOrWhiteSpace($ProjectName) -Or $projects.Length -eq 0 )
     {
         Write-Output "No Projects specified, build all..."
