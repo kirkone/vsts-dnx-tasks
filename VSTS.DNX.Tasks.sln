@@ -66,22 +66,4 @@ Global
 		{DDD30A4B-B1CC-4E95-B0F0-8A07C2457940} = {E0162640-728B-43D2-ACB4-262A14F85180}
 		{9AABAB32-7474-4540-952A-B90096ADF863} = {DDD30A4B-B1CC-4E95-B0F0-8A07C2457940}
 	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://kirkone.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = VSTS.DNX.Tasks.SlotSwap\\VSTS.DNX.Tasks.SlotSwap.pssproj
-		SccProjectName1 = VSTS.DNX.Tasks.SlotSwap
-		SccLocalPath1 = VSTS.DNX.Tasks.SlotSwap
-		SccProjectUniqueName2 = VSTS.DNX.Tasks.BuildWebPackage\\VSTS.DNX.Tasks.BuildWebPackage.pssproj
-		SccProjectName2 = VSTS.DNX.Tasks.BuildWebPackage
-		SccLocalPath2 = VSTS.DNX.Tasks.BuildWebPackage
-		SccProjectUniqueName3 = VSTS.DNX.Tasks.Shared\\VSTS.DNX.Tasks.Shared.pssproj
-		SccProjectName3 = VSTS.DNX.Tasks.Shared
-		SccLocalPath3 = VSTS.DNX.Tasks.Shared
-		SccProjectUniqueName4 = VSTS.DNX.Tasks.PublishWebPackage\\VSTS.DNX.Tasks.PublishWebPackage.pssproj
-		SccProjectName4 = VSTS.DNX.Tasks.PublishWebPackage
-		SccLocalPath4 = VSTS.DNX.Tasks.PublishWebPackage
-	EndGlobalSection
 EndGlobal
