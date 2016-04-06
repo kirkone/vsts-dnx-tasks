@@ -1,0 +1,87 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "VSTS.DNX.Tasks.SlotSwap", "VSTS.DNX.Tasks.SlotSwap\VSTS.DNX.Tasks.SlotSwap.pssproj", "{F07AB8E3-C119-4F83-867F-2F4318965E7B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EF57AD86-16EF-4340-A095-FE74356FAB56}"
+	ProjectSection(SolutionItems) = preProject
+		commands.json = commands.json
+		CreateExtention.ps1 = CreateExtention.ps1
+		License.txt = License.txt
+		Notes.md = Notes.md
+		README.md = README.md
+		vss-extension.json = vss-extension.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extension", "Extension", "{E0162640-728B-43D2-ACB4-262A14F85180}"
+	ProjectSection(SolutionItems) = preProject
+		Extension\ExtensionOverview.md = Extension\ExtensionOverview.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{DDD30A4B-B1CC-4E95-B0F0-8A07C2457940}"
+	ProjectSection(SolutionItems) = preProject
+		Extension\Images\ExtensionIcon.png = Extension\Images\ExtensionIcon.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Screenshots", "Screenshots", "{9AABAB32-7474-4540-952A-B90096ADF863}"
+	ProjectSection(SolutionItems) = preProject
+		Extension\Images\Screenshots\Screenshot1.png = Extension\Images\Screenshots\Screenshot1.png
+	EndProjectSection
+EndProject
+Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "VSTS.DNX.Tasks.BuildWebPackage", "VSTS.DNX.Tasks.BuildWebPackage\VSTS.DNX.Tasks.BuildWebPackage.pssproj", "{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}"
+EndProject
+Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "VSTS.DNX.Tasks.Shared", "VSTS.DNX.Tasks.Shared\VSTS.DNX.Tasks.Shared.pssproj", "{E57E87A3-CE8B-4F9C-A4F4-5995C31E3040}"
+EndProject
+Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "VSTS.DNX.Tasks.PublishWebPackage", "VSTS.DNX.Tasks.PublishWebPackage\VSTS.DNX.Tasks.PublishWebPackage.pssproj", "{6F37AD1D-6A5E-4382-85C9-9F816D790E22}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F07AB8E3-C119-4F83-867F-2F4318965E7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F07AB8E3-C119-4F83-867F-2F4318965E7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F07AB8E3-C119-4F83-867F-2F4318965E7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F07AB8E3-C119-4F83-867F-2F4318965E7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E57E87A3-CE8B-4F9C-A4F4-5995C31E3040}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E57E87A3-CE8B-4F9C-A4F4-5995C31E3040}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E57E87A3-CE8B-4F9C-A4F4-5995C31E3040}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E57E87A3-CE8B-4F9C-A4F4-5995C31E3040}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F37AD1D-6A5E-4382-85C9-9F816D790E22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F37AD1D-6A5E-4382-85C9-9F816D790E22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F37AD1D-6A5E-4382-85C9-9F816D790E22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F37AD1D-6A5E-4382-85C9-9F816D790E22}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DDD30A4B-B1CC-4E95-B0F0-8A07C2457940} = {E0162640-728B-43D2-ACB4-262A14F85180}
+		{9AABAB32-7474-4540-952A-B90096ADF863} = {DDD30A4B-B1CC-4E95-B0F0-8A07C2457940}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://kirkone.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = VSTS.DNX.Tasks.SlotSwap\\VSTS.DNX.Tasks.SlotSwap.pssproj
+		SccProjectName1 = VSTS.DNX.Tasks.SlotSwap
+		SccLocalPath1 = VSTS.DNX.Tasks.SlotSwap
+		SccProjectUniqueName2 = VSTS.DNX.Tasks.BuildWebPackage\\VSTS.DNX.Tasks.BuildWebPackage.pssproj
+		SccProjectName2 = VSTS.DNX.Tasks.BuildWebPackage
+		SccLocalPath2 = VSTS.DNX.Tasks.BuildWebPackage
+		SccProjectUniqueName3 = VSTS.DNX.Tasks.Shared\\VSTS.DNX.Tasks.Shared.pssproj
+		SccProjectName3 = VSTS.DNX.Tasks.Shared
+		SccLocalPath3 = VSTS.DNX.Tasks.Shared
+		SccProjectUniqueName4 = VSTS.DNX.Tasks.PublishWebPackage\\VSTS.DNX.Tasks.PublishWebPackage.pssproj
+		SccProjectName4 = VSTS.DNX.Tasks.PublishWebPackage
+		SccLocalPath4 = VSTS.DNX.Tasks.PublishWebPackage
+	EndGlobalSection
+EndGlobal

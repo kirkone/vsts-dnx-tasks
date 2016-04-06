@@ -1,0 +1,124 @@
+{
+    "manifestVersion": 1,
+    "id": "vsts-dnx-tasks",
+    "name": "VSTS DNX Tasks",
+    "version": "0.0.7",
+    "publisher": "kirkone",
+    "public": true,
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "scope": [
+        "vso.build",
+        "vso.serviceendpoint"
+    ],
+    "description": "Build and Release Management extensions that enable you to package and publish dnx projects",
+    "categories": [
+        "Build and release"
+    ],
+    "tags": [
+        "DNX",
+        "ASP.NET 5",
+        "Publish",
+        "Package"
+    ],
+    "screenshots": [
+        {
+            "path": "Extension/Images/Screenshots/Screenshot1.png"
+        }
+    ],
+    "content": {
+        "details": {
+            "path": "readme.md"
+        },
+        "license": {
+            "path": "license.txt"
+        }
+    },
+    "links": {
+        "getstarted": {
+            "uri": "https://github.com/kirkone/vsts-dnx-tasks"
+        },
+        "support": {
+            "uri": "https://github.com/kirkone/vsts-dnx-tasks/issues"
+        }
+    },
+    "branding": {
+        "color": "rgb(27, 27, 27)",
+        "theme": "dark"
+    },
+    "icons": {
+        "default": "Extension/Images/ExtensionIcon.png"
+    },
+    "files": [
+        {
+            "path": "VSTS.DNX.Tasks.BuildWebPackage/BuildWebPackage.ps1"
+        },
+        {
+            "path": "VSTS.DNX.Tasks.BuildWebPackage/InstallDNVM.psm1",
+            "contentType": "text/plain"
+        },
+        {
+            "path": "VSTS.DNX.Tasks.BuildWebPackage/task.json"
+        },
+        {
+            "path": "VSTS.DNX.Tasks.BuildWebPackage/icon.png"
+        },
+
+        {
+            "path": "VSTS.DNX.Tasks.PublishWebPackage/PublishWebPackage.ps1"
+        },
+        {
+            "path": "VSTS.DNX.Tasks.PublishWebPackage/task.json"
+        },
+        {
+            "path": "VSTS.DNX.Tasks.PublishWebPackage/icon.png"
+        },
+
+        {
+            "path": "VSTS.DNX.Tasks.SlotSwap/SwapDepoymentSlots.ps1"
+        },
+        {
+            "path": "VSTS.DNX.Tasks.SlotSwap/task.json"
+        },
+        {
+            "path": "VSTS.DNX.Tasks.SlotSwap/icon.png"
+        }
+    ],
+    "contributions": [
+        {
+            "id": "VSTS.DNX.Tasks.BuildWebPackage",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "VSTS.DNX.Tasks.BuildWebPackage"
+            }
+        },
+
+        {
+            "id": "VSTS.DNX.Tasks.PublishWebPackage",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "VSTS.DNX.Tasks.PublishWebPackage"
+            }
+        },
+
+        {
+            "id": "VSTS.DNX.Tasks.SlotSwap",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "VSTS.DNX.Tasks.SlotSwap"
+            }
+        }
+    ]
+}

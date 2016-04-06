@@ -1,32 +1,34 @@
-# You've added your first ReadMe file!
-A README.md file is intended to quickly orient readers to what your project can do.  New to Markdown? [Learn more](http://go.microsoft.com/fwlink/p/?LinkId=524306&clcid=0x409)
+# VSTS DNX Tasks
 
-## Edit this ReadMe and commit your change to a topic branch
-In Git, branches are cheap.  You should use them whenever you're making changes to your repository.  Edit this file by clicking on the edit icon.
+This extention allows you to make builds with the new ASP.NET 5 tools easier.  
+This extention includes the following tasks:
 
-Then make some changes to this ReadMe file.
+- DNX Tasks Build Web Package
+- DNX Tasks Publish Web Package
+- DNX Tasks Azure SlotSwap
 
-> Make some **edits** to _this_ blockquote
+## DNX Tasks Build Web Package
 
-When you are done, click the dropdown arrow next to the save button - that will allow you to commit your changes to a new branch.
+With this script you can build a website project and create an output folder with all nesseccary content for a deploymant to Azue.
+You have to specify a project in your solution by setting the "**Project Name**" property. The name is in fact the folder name of the projekt. Make sure to wrap the name in doublequotes if there are any spaces in this name.  
+Multiple projects can be build by seperate them with a space. If you leave this field blank all projects in the **Working folder**/src/ folder are build.
 
-## Create a pull request to contribute your changes back into master
-Pull requests are the way to move changes from a topic branch back into the master branch.
 
-Click on the **Pull Requests** page in the **CODE** hub, then click "New Pull Request" to create a new pull request from your topic branch to the master branch.
+The "**Build Configuration**" property can be empty or any single word you want to have there.
 
-When you are done adding details, click "Create Pull request". Once a pull request is sent, reviewers can see your changes, recommend modifications, or even push follow-up commits.
+All the results of the build process will put in the folder specified in "**Output Folder**".
 
-First time creating a pull request?  [Learn more](http://go.microsoft.com/fwlink/?LinkId=533211&clcid=0x409)
+Under the "**Advanced**" group you can decide if you want the source code to be included in the build output with the "**Publish Source**" switch.
+Also the "**Working folder**" can be specified here. This should be the folder where your .sln file is.
 
-### Congratulations! You've completed the grand tour of the CODE hub!
+The Task will look in **Working folder**/src/**Project Name** for a project.json and starts building this project.
 
-# Next steps
+**Sidenote**: All your npm, grunt, bower and so on tasks should be before this task to make sure all the generated content is included in the output.
 
-If you haven't done so yet:
-* [Install Visual Studio](http://go.microsoft.com/fwlink/?LinkId=309297&clcid=0x409&slcid=0x409)
-* [Install Git](http://git-scm.com/downloads)
+## DNX Tasks Publish Web Package
 
-Then clone this repo to your local machine to get started with your own project.
+todo...
 
-Happy coding!
+## DNX Tasks Azure SlotSwap
+
+todo...
