@@ -3,13 +3,13 @@
     "name": "DNX.Tasks.PublishWebPackage",
     "friendlyName": "DNX Tasks Azure PublishWebPackage",
     "description": "Publish a DNX package to Azure Website",
-    "helpMarkDown": "(todo)",
+    "helpMarkDown": "Version: 0.0.2",
     "category": "Deploy",
     "author": "Kirsten Kluge",
     "version": {
         "Major": 0,
         "Minor": 0,
-        "Patch": 1
+        "Patch": 2
     },
     "visibility": [
         "Build",

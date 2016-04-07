@@ -3,7 +3,7 @@
     "name": "DNX.Tasks.SlotSwap",
     "friendlyName": "DNX Tasks Azure SlotSwap",
     "description": "Swap a slot in Azure web site deployment slots.",
-    "helpMarkDown": "(todo)",
+    "helpMarkDown": "Version: 0.0.2",
     "category": "Deploy",
     "author": "Kirsten Kluge",
     "version": {

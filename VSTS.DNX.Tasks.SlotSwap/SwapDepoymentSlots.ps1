@@ -13,10 +13,11 @@ param (
 
 Write-Verbose "Entering script SwapDeploymentSlots.ps1"
 
-Write-Output "WebSiteName: $WebSiteName"
-Write-Output "From: $From"
-Write-Output "To: $To"
-
+Write-Output "Parameter Values:"
+foreach($key in $PSBoundParameters.Keys)
+{
+    Write-Output ("    $key = $($PSBoundParameters[$key])")
+}
 
 . Switch-AzureWebsiteSlot -Name $WebSiteName -Slot1 $From -Slot2 $To -Force -Verbose
 
