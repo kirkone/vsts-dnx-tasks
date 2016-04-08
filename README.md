@@ -1,18 +1,17 @@
-# VSTS DNX Tasks
+# VSTS DNX Tasks ##
 
 This extension allows you to make builds with the new ASP.NET 5 tools easier.  
 This extension includes the following tasks:
 
-- DNX Tasks Build Web Package
-- DNX Tasks Publish Web Package
-- DNX Tasks Azure SlotSwap
+- [link DNX Tasks Build Web Package](#buildwebpackage)
+- [link DNX Tasks Publish Web Package](#publishwebpackage)
+- [link DNX Tasks Azure SlotSwap](#slotswap)
 
-## DNX Tasks Build Web Package
+## <a name="buildwebpackage"/>DNX Tasks Build Web  ##
 
-With this script you can build a website project and create an output folder with all necessary content for a deployment to Azue.
+With this task you can build a website project and create an output folder with all necessary content for a deployment to Azue.
 You have to specify a project in your solution by setting the "**Project Name**" property. The name is in fact the folder name of the project. Make sure to wrap the name in double quotes if there are any spaces in this name.  
 Multiple projects can be build by separate them with a space. If you leave this field blank all projects in the **Working folder**/src/ folder are build.
-
 
 The "**Build Configuration**" property can be empty or any single word you want to have there.
 
@@ -23,12 +22,16 @@ Also the "**Working folder**" can be specified here. This should be the folder w
 
 The Task will look in **Working folder**/src/**Project Name** for a project.json and starts building this project.
 
-**Side note**: All your npm, grunt, bower and so on tasks should be before this task to make sure all the generated content is included in the output.
+> All your npm, grunt, bower and so on tasks should be before this task to make sure all the generated content is included in the output.
 
-## DNX Tasks Publish Web Package
-
-todo...
-
-## DNX Tasks Azure SlotSwap
+## <a name="publishwebpackage"/>DNX Tasks Publish Web Package ##
 
 todo...
+
+## <a name="slotswap"/>DNX Tasks Azure SlotSwap ##
+
+If you use deployment slots in your Azure Website and want to switch the slots after deployment you can use this task.
+
+In "**Azure Classic Subscription**" select the subscription your Website is assigned to.  
+The Name of the Azure Website have to be in "**Web App Name**".  
+Specify the slots you want to swap in the "**From**" and "**To**" fields.
