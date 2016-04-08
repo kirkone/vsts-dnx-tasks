@@ -35,5 +35,3 @@ If you use deployment slots in your Azure Website and want to switch the slots a
 In "**Azure Classic Subscription**" select the subscription your Website is assigned to.  
 The Name of the Azure Website have to be in "**Web App Name**".  
 Specify the slots you want to swap in the "**From**" and "**To**" fields.
-
-
