@@ -1,7 +1,7 @@
 # VSTS DNX Tasks
 
-This extention allows you to make builds with the new ASP.NET 5 tools easier.  
-This extention includes the following tasks:
+This extension allows you to make builds with the new ASP.NET 5 tools easier.  
+This extension includes the following tasks:
 
 - DNX Tasks Build Web Package
 - DNX Tasks Publish Web Package
@@ -9,9 +9,9 @@ This extention includes the following tasks:
 
 ## DNX Tasks Build Web Package
 
-With this script you can build a website project and create an output folder with all nesseccary content for a deploymant to Azue.
-You have to specify a project in your solution by setting the "**Project Name**" property. The name is in fact the folder name of the projekt. Make sure to wrap the name in doublequotes if there are any spaces in this name.  
-Multiple projects can be build by seperate them with a space. If you leave this field blank all projects in the **Working folder**/src/ folder are build.
+With this script you can build a website project and create an output folder with all necessary content for a deployment to Azue.
+You have to specify a project in your solution by setting the "**Project Name**" property. The name is in fact the folder name of the project. Make sure to wrap the name in double quotes if there are any spaces in this name.  
+Multiple projects can be build by separate them with a space. If you leave this field blank all projects in the **Working folder**/src/ folder are build.
 
 
 The "**Build Configuration**" property can be empty or any single word you want to have there.
@@ -23,7 +23,7 @@ Also the "**Working folder**" can be specified here. This should be the folder w
 
 The Task will look in **Working folder**/src/**Project Name** for a project.json and starts building this project.
 
-**Sidenote**: All your npm, grunt, bower and so on tasks should be before this task to make sure all the generated content is included in the output.
+**Side note**: All your npm, grunt, bower and so on tasks should be before this task to make sure all the generated content is included in the output.
 
 ## DNX Tasks Publish Web Package
 
