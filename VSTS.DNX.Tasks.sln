@@ -36,6 +36,8 @@ Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "VSTS.DNX.Tasks.Shared", "VS
 EndProject
 Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "VSTS.DNX.Tasks.PublishWebPackage", "VSTS.DNX.Tasks.PublishWebPackage\VSTS.DNX.Tasks.PublishWebPackage.pssproj", "{6F37AD1D-6A5E-4382-85C9-9F816D790E22}"
 EndProject
+Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "VSTS.DNX.Tasks.BuildNugetPackage", "VSTS.DNX.Tasks.BuildNugetPackage\VSTS.DNX.Tasks.BuildNugetPackage.pssproj", "{BB41D33B-9A93-481B-9CD5-574BE732F5A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +60,10 @@ Global
 		{6F37AD1D-6A5E-4382-85C9-9F816D790E22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F37AD1D-6A5E-4382-85C9-9F816D790E22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F37AD1D-6A5E-4382-85C9-9F816D790E22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB41D33B-9A93-481B-9CD5-574BE732F5A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB41D33B-9A93-481B-9CD5-574BE732F5A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB41D33B-9A93-481B-9CD5-574BE732F5A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB41D33B-9A93-481B-9CD5-574BE732F5A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

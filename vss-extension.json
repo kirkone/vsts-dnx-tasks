@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "vsts-dnx-tasks",
     "name": "VSTS DNX Tasks",
-    "version": "0.0.14",
+    "version": "0.0.17",
     "publisher": "kirkone",
     "public": true,
     "targets": [
@@ -68,6 +68,20 @@
         },
 
         {
+            "path": "VSTS.DNX.Tasks.BuildNugetPackage/BuildNugetPackage.ps1"
+        },
+        {
+            "path": "VSTS.DNX.Tasks.BuildNugetPackage/InstallDNVM.psm1",
+            "contentType": "text/plain"
+        },
+        {
+            "path": "VSTS.DNX.Tasks.BuildNugetPackage/task.json"
+        },
+        {
+            "path": "VSTS.DNX.Tasks.BuildNugetPackage/icon.png"
+        },
+
+        {
             "path": "VSTS.DNX.Tasks.PublishWebPackage/PublishWebPackage.ps1"
         },
         {
@@ -96,6 +110,17 @@
             ],
             "properties": {
                 "name": "VSTS.DNX.Tasks.BuildWebPackage"
+            }
+        },
+
+        {
+            "id": "VSTS.DNX.Tasks.BuildNugetPackage",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "VSTS.DNX.Tasks.BuildNugetPackage"
             }
         },
 

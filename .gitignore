@@ -236,3 +236,4 @@ _Pvt_Extensions
 .fake/
 *.vsix
 /VSTS.DNX.Tasks.BuildWebPackage/InstallDNVM.psm1
+/VSTS.DNX.Tasks.BuildNugetPackage/InstallDNVM.psm1

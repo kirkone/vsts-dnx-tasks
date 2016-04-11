@@ -1,13 +1,14 @@
-# VSTS DNX Tasks ##
+# VSTS DNX Tasks
 
 This extension allows you to make builds with the new ASP.NET 5 tools easier.  
 This extension includes the following tasks:
 
-- [link DNX Tasks Build Web Package](#buildwebpackage)
-- [link DNX Tasks Publish Web Package](#publishwebpackage)
-- [link DNX Tasks Azure SlotSwap](#slotswap)
+- DNX Tasks Build Web Package
+- DNX Tasks Publish Web Package
+- DNX Tasks Build Nuget Package
+- DNX Tasks Azure SlotSwap
 
-## <a name="buildwebpackage"/>DNX Tasks Build Web  ##
+## DNX Tasks Build Web
 
 With this task you can build a website project and create an output folder with all necessary content for a deployment to Azue.
 You have to specify a project in your solution by setting the "**Project Name**" property. The name is in fact the folder name of the project. Make sure to wrap the name in double quotes if there are any spaces in this name.  
@@ -24,11 +25,15 @@ The Task will look in **Working folder**/src/**Project Name** for a project.json
 
 > All your npm, grunt, bower and so on tasks should be before this task to make sure all the generated content is included in the output.
 
-## <a name="publishwebpackage"/>DNX Tasks Publish Web Package ##
+## DNX Tasks Publish Web Package
 
-todo...
+implemented, docu comming soon...
 
-## <a name="slotswap"/>DNX Tasks Azure SlotSwap ##
+## DNX Tasks Build Nuget Package
+
+implemented, docu comming soon...
+
+## DNX Tasks Azure SlotSwap
 
 If you use deployment slots in your Azure Website and want to switch the slots after deployment you can use this task.
 

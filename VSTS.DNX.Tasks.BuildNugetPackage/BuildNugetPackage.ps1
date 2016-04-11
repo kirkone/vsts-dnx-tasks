@@ -7,12 +7,12 @@ param (
     [String] [Parameter(Mandatory = $true)]
     $OutputFolder = ".\publish",
     [string] [Parameter(Mandatory = $true)]
-    $PublishSource,
+    $PreRelease,
     [String] [Parameter(Mandatory = $false)]
     $WorkingFolder = ""
 )
 
-Write-Verbose "Entering script BuildWebPackage.ps1"
+Write-Verbose "Entering script BuildNugetPackage.ps1"
 
 Write-Output "Parameter Values:"
 foreach($key in $PSBoundParameters.Keys)
@@ -27,15 +27,22 @@ Function Main
         $BuildConfiguration = "Release"
     }
 
-    $isPublishSource = [System.Convert]::ToBoolean($PublishSource)
+    $isPreRelease = [System.Convert]::ToBoolean($PreRelease)
 
     $OutputFolder = $OutputFolder.Trim('"')
+
+    if($isPreRelease)
+    {
+        $prefix = "pre-"
+
+        $VersionRegex = "\d+"
+        $VersionData = [regex]::matches($Env:BUILD_BUILDNUMBER,$VersionRegex)
+        $Env:DNX_BUILD_VERSION = $prefix + $VersionData[0]
+    }
 
     Import-Module "$(Split-Path -parent $PSCommandPath)\InstallDNVM.psm1"
 
     Install-DNVM
-
-    $Env:DNU_PUBLISH_AZURE = $true
 
     $projects = $ProjectName.Trim() -split(" ");
 
@@ -55,32 +62,16 @@ Function Main
     $projectList = $projects | % {""".\src\$($_.Trim('"'))""" } | & {"$input"}
     Invoke-Expression "& dnu restore $projectList --no-cache"
 
-    build($projectList)
-
-    foreach($project in $projects)
-    {
-        $p = ".\src\$($project.Trim('"'))"
-        publish($p)
-    }
+    pack($projectList)
 }
 
-Function build($project)
+Function pack($project)
 {
-    Write-Output "dnu build for:"
+    Write-Output "dnu pack for:"
     Write-Output $($project -split(" ") | % { "    $_" })
-    Invoke-Expression "& dnu build $project --configuration $BuildConfiguration"
-}
-
-Function publish($project)
-{
-    $outDir = (Get-Item $project).Name
-    $noSource = &{If(!$isPublishSource){"--no-source"}}
-
-    Write-Output "dnu publish for:"
-    Write-Output $($project -split(" ") | % { "    $_" })
-    Invoke-Expression "& dnu publish $project --configuration $BuildConfiguration --out ""$OutputFolder\$outDir"" --runtime active $noSource"
+    Invoke-Expression "& dnu pack $project --configuration $BuildConfiguration --out ""$OutputFolder"""
 }
 
 Main
 
-Write-Verbose "Leaving script BuildWebPackage.ps1"
+Write-Verbose "Leaving script BuildNugetPackage.ps1"
