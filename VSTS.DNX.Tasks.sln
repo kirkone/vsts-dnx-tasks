@@ -8,7 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EF57AD86-16EF-4340-A095-FE74356FAB56}"
 	ProjectSection(SolutionItems) = preProject
 		commands.json = commands.json
-		CreateExtention.ps1 = CreateExtention.ps1
+		CreateExtension.ps1 = CreateExtension.ps1
 		License.txt = License.txt
 		Notes.md = Notes.md
 		README.md = README.md
