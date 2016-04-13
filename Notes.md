@@ -2,7 +2,7 @@
 
 npm i -g tfx-cli  
 
-## create Extention 
+## create Extension 
 
 tfx extension create --manifest-globs vss-extension.json
 
