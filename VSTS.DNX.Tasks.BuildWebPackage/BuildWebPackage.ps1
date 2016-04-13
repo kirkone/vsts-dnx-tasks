@@ -9,7 +9,9 @@ param (
     [string] [Parameter(Mandatory = $true)]
     $PublishSource,
     [String] [Parameter(Mandatory = $false)]
-    $WorkingFolder = ""
+    $WorkingFolder = "",
+    [String] [Parameter(Mandatory = $false)]
+    $SourceFolder = ""
 )
 
 Write-Verbose "Entering script BuildWebPackage.ps1"
@@ -27,6 +29,16 @@ Function Main
         $BuildConfiguration = "Release"
     }
 
+    $SourceFolder = $SourceFolder.Trim().Trim("""").Trim().Replace("/","\\").Trim("\")
+    if($SourceFolder -ne "")
+    {
+        $SourceFolder = ".\" + $SourceFolder + "\"
+    }
+    else
+    {
+        $SourceFolder = ".\"
+    }
+
     $isPublishSource = [System.Convert]::ToBoolean($PublishSource)
 
     $OutputFolder = $OutputFolder.Trim('"')
@@ -42,24 +54,30 @@ Function Main
     if([string]::IsNullOrWhiteSpace($ProjectName) -Or $projects.Length -eq 0 )
     {
         Write-Output "No Projects specified, build all..."
-        $projects = dir -Path .\src\*\* -Filter project.json | % {
+        $projects = dir -Path "$SourceFolder*\*" -Filter project.json | % {
             $_.Directory.Name
         } | & {$input}
     }
 
-    Write-Output "$($projects.Length) Projects to build"
+    if($projects.Count -eq 0)
+    {
+        Write-Error "No projects found in Source Folder!"
+        return
+    }
+
+    Write-Output "$($projects.Count) Projects to build"
 
     Write-Output "dnu restore for:"
-    Write-Output $projects | % {"    "".\src\$($_.Trim('"'))""" }
+    Write-Output $projects | % {"    ""$SourceFolder$($_.Trim('"'))""" }
 
-    $projectList = $projects | % {""".\src\$($_.Trim('"'))""" } | & {"$input"}
+    $projectList = $projects | % {"""$SourceFolder$($_.Trim('"'))""" } | & {"$input"}
     Invoke-Expression "& dnu restore $projectList --no-cache"
 
     build($projectList)
 
     foreach($project in $projects)
     {
-        $p = ".\src\$($project.Trim('"'))"
+        $p = "$SourceFolder$($project.Trim('"'))"
         publish($p)
     }
 }
