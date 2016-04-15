@@ -88,7 +88,7 @@
             "label": "Specific runtime",
             "defaultValue": "false",
             "required": true,
-            "helpMarkDown": "If this is true, the runtime will be same as you set in global.json including architecture",
+            "helpMarkDown": "If this is true, the runtime will be same as in global.json including architecture",
             "groupName": "advanced"
         },
         {
