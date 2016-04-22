@@ -24,20 +24,14 @@ foreach($key in $PSBoundParameters.Keys)
 
 Function Main
 {
+    Import-Module "$(Split-Path -parent $PSCommandPath)\Common.psm1"
+
     if($BuildConfiguration.Trim() -eq "")
     {
         $BuildConfiguration = "Release"
     }
 
-    $SourceFolder = $SourceFolder.Trim().Trim("""").Trim().Replace("/","\\").Trim("\")
-    if($SourceFolder -ne "")
-    {
-        $SourceFolder = ".\" + $SourceFolder + "\"
-    }
-    else
-    {
-        $SourceFolder = ".\"
-    }
+    $SourceFolder = Trim-Path $SourceFolder
 
     $isPublishSource = [System.Convert]::ToBoolean($PublishSource)
 

@@ -1,6 +1,6 @@
 ﻿function Install-Dnvm
 {
-    Write-Verbose "Entering Method Prepare-Dnvm"
+    Write-Verbose "Entering Method Install-Dnvm"
 
     $dnvm = Get-Command "dnvm" -ErrorAction SilentlyContinue
     $dnvmPath = ".\Tools\dnvm.ps1"
@@ -48,5 +48,5 @@
     Write-Output "Calling: $dnvmPath install $dnxVersion -Persistent"
     & $dnvmPath install "$dnxVersion" -Persistent
 
-    Write-Verbose "Leaving script Prepare-Dnvm"
+    Write-Verbose "Leaving script Install-Dnvm"
 }

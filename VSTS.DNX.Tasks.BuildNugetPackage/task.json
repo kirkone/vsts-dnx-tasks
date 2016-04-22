@@ -37,7 +37,7 @@
             "label": "Build Configuration",
             "type": "pickList",
             "defaultValue": "",
-            "helpMarkdown": "The build configuration to use. Default is \"Release\"",
+            "helpMarkdown": "The build configuration to use. Default is \"Release",
             "required": false,
             "properties": {
                 "EditableOptions": "True"
@@ -71,6 +71,15 @@
             "defaultValue": "$(Build.SourcesDirectory)",
             "required": false,
             "helpMarkDown": "Current working directory when script is run.",
+            "groupName": "advanced"
+        },
+        {
+            "name": "SourceFolder",
+            "type": "filePath",
+            "label": "Source folder",
+            "defaultValue": "\\src",
+            "required": false,
+            "helpMarkDown": "Folder where your project directories are. <br>Default is: \\src",
             "groupName": "advanced"
         }
     ],
