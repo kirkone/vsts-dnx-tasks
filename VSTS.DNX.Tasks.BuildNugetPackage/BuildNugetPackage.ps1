@@ -46,7 +46,7 @@ Function Main
 
     $projects = $ProjectName.Trim() -split(" ");
 
-    if([string]::IsNullOrWhiteSpace($ProjectName) -Or $projects.Length -eq 0 )
+    if([string]::IsNullOrWhiteSpace($ProjectName) -Or $projects.Count -eq 0 )
     {
         Write-Output "No Projects specified, build all..."
         $projects = dir -Path .\src\*\* -Filter project.json | % {
@@ -54,7 +54,7 @@ Function Main
         } | & {$input}
     }
 
-    Write-Output "$($projects.Length) Projects to build"
+    Write-Output "$($projects.Count) Projects to build"
 
     Write-Output "dnu restore for:"
     Write-Output $projects | % {"    "".\src\$($_.Trim('"'))""" }

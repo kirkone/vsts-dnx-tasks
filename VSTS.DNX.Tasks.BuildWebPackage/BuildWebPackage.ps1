@@ -51,7 +51,7 @@ Function Main
 
     $projects = $ProjectName.Trim() -split(" ");
 
-    if([string]::IsNullOrWhiteSpace($ProjectName) -Or $projects.Length -eq 0 )
+    if([string]::IsNullOrWhiteSpace($ProjectName) -Or $projects.Count -eq 0 )
     {
         Write-Output "No Projects specified, build all..."
         $projects = dir -Path "$SourceFolder*\*" -Filter project.json | % {
