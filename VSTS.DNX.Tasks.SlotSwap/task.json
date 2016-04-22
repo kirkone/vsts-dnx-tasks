@@ -3,13 +3,13 @@
     "name": "DNX.Tasks.SlotSwap",
     "friendlyName": "DNX Tasks Azure SlotSwap",
     "description": "Swap a slot in Azure web site deployment slots.",
-    "helpMarkDown": "Version: 0.0.2",
+    "helpMarkDown": "Version: 0.0.3",
     "category": "Deploy",
     "author": "Kirsten Kluge",
     "version": {
         "Major": 0,
         "Minor": 0,
-        "Patch": 2
+        "Patch": 3
     },
     "visibility": [
         "Build",
@@ -27,6 +27,17 @@
             "defaultValue": "",
             "required": true,
             "helpMarkDown": "Azure Classic subscription to configure before running PowerShell"
+        },
+        {
+            "name": "WebSiteLocation",
+            "type": "pickList",
+            "label": "Web App Location",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Select a region for deployment. Possible options are **East US**, **East US 2**, **Central US**, **South Central US**, **West US**, **North Europe**, **West Europe** and others.",
+            "properties": {
+                "EditableOptions": "True"
+            }
         },
         {
             "name": "WebSiteName",
@@ -61,8 +72,13 @@
             "endpointId": "$(ConnectedServiceName)",
             "dataSourceName": "AzureWebSiteNames",
             "parameters": {
-                "WebSiteLocation": ""
+                "WebSiteLocation": "$(WebSiteLocation)"
             }
+        },
+        {
+            "target": "WebSiteLocation",
+            "endpointId": "$(ConnectedServiceName)",
+            "dataSourceName": "AzureLocations"
         }
     ],
     "instanceNameFormat": "DNX Tasks SlotSwap: $(WebSiteName)",
