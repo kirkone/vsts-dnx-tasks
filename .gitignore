@@ -237,3 +237,5 @@ _Pvt_Extensions
 *.vsix
 /VSTS.DNX.Tasks.BuildWebPackage/InstallDNVM.psm1
 /VSTS.DNX.Tasks.BuildNugetPackage/InstallDNVM.psm1
+/VSTS.DNX.Tasks.BuildNugetPackage/Common.psm1
+/VSTS.DNX.Tasks.BuildWebPackage/Common.psm1

@@ -85,7 +85,7 @@
         {
             "name": "SpecificRuntime",
             "type": "boolean",
-            "label": "Specific runtime",
+            "label": "Specific Runtime",
             "defaultValue": "false",
             "required": true,
             "helpMarkDown": "If this is true, the runtime will be same as in global.json including architecture",
@@ -94,7 +94,7 @@
         {
             "name": "UnstableRuntime",
             "type": "boolean",
-            "label": "Unstable runtime",
+            "label": "Unstable Runtime",
             "defaultValue": "false",
             "required": true,
             "helpMarkDown": "If this is true, the runtime will be from the unstable dev feed. This will give you the latest development version of the runtime.",

@@ -68,12 +68,12 @@ Please have a look here: [GitHub Issues](https://github.com/kirkone/vsts-dnx-tas
 
 ### Release Notes
 
-#### Version 0.0.20
+#### Version 0.0.21
 
 - updated Readme file
 - code cleanup
 
-##### DNX Tasks Build Nuget 0.0.4
+##### DNX Tasks Build Nuget 0.0.5
 
 - added option for "**Source Folder**"
 - fixed project count in console output
@@ -81,6 +81,16 @@ Please have a look here: [GitHub Issues](https://github.com/kirkone/vsts-dnx-tas
 ##### DNX Tasks Build Web 0.0.11
 
 - fixed project count in console output
+
+##### DNX Tasks Publish Web 0.0.3
+
+- added option for "**Web App Location**"
+
+##### DNX Tasks Azure SlotSwap 0.0.3
+
+- added option for "**Web App Location**"
+
+
 
 #### Version 0.0.19
 
