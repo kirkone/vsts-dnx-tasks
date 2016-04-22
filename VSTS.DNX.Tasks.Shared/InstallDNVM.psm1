@@ -41,16 +41,26 @@
 
     $globalJson = Get-Content -Path .\global.json -Raw -ErrorAction Ignore | ConvertFrom-Json -ErrorAction Ignore
 
+    $dnxParams = ""
+
     if($globalJson)
     {
         Write-Output "Take DNX version from global.json."
         $dnxVersion = $globalJson.sdk.version
-        $dnxParams = ""
         if($SpecificRuntime)
         {
             $dnxRuntime = $globalJson.sdk.runtime
             $dnxArch = $globalJson.sdk.architecture
-            $dnxParams = "-r $dnxRuntime -a $dnxArch"
+
+            Write-Output "    Specific Runtime:"
+            Write-Output "        Runtime: $dnxRuntime"
+            Write-Output "        Architecture: $dnxArch"
+
+            $dnxParams =  (
+                "{0} {1}" -f
+                    $(If(-Not [string]::IsNullOrWhiteSpace($dnxRuntime)){"-r $dnxRuntime"}),
+                    $(If(-Not [string]::IsNullOrWhiteSpace($dnxArch)){"-a $dnxArch"})
+            )
         }
     }
     else
