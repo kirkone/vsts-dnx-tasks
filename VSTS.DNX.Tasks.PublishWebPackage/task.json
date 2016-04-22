@@ -3,13 +3,13 @@
     "name": "DNX.Tasks.PublishWebPackage",
     "friendlyName": "DNX Tasks Azure PublishWebPackage",
     "description": "Publish a DNX package to Azure Website",
-    "helpMarkDown": "Version: 0.0.2",
+    "helpMarkDown": "Version: 0.0.3",
     "category": "Deploy",
     "author": "Kirsten Kluge",
     "version": {
         "Major": 0,
         "Minor": 0,
-        "Patch": 2
+        "Patch": 3
     },
     "visibility": [
         "Build",
@@ -36,6 +36,17 @@
             "helpMarkDown": "Azure Classic subscription to configure before running PowerShell"
         },
         {
+            "name": "WebSiteLocation",
+            "type": "pickList",
+            "label": "Web App Location",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Select a region for deployment. Possible options are **East US**, **East US 2**, **Central US**, **South Central US**, **West US**, **North Europe**, **West Europe** and others.",
+            "properties": {
+                "EditableOptions": "True"
+            }
+        },
+        {
             "name": "WebSiteName",
             "type": "pickList",
             "label": "Web App Name",
@@ -50,7 +61,7 @@
             "type": "pickList",
             "label": "Deployment Slot",
             "defaultValue": "",
-            "helpMarkdown": "Slotname where to deploy.  Leave empty if not used.",
+            "helpMarkdown": "Slotname where to deploy. Leave empty if not used.",
             "required": false,
             "properties": {
                 "EditableOptions": "True"
@@ -93,8 +104,13 @@
             "endpointId": "$(ConnectedServiceName)",
             "dataSourceName": "AzureWebSiteNames",
             "parameters": {
-                "WebSiteLocation": ""
+                "WebSiteLocation": "$(WebSiteLocation)"
             }
+        },
+        {
+            "target": "WebSiteLocation",
+            "endpointId": "$(ConnectedServiceName)",
+            "dataSourceName": "AzureLocations"
         }
     ],
     "instanceNameFormat": "Publish Web Package: $(WebSiteName)",
