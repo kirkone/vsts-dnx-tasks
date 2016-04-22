@@ -11,7 +11,7 @@ param (
     [String] [Parameter(Mandatory = $false)]
     $WorkingFolder = "",
     [String] [Parameter(Mandatory = $false)]
-    $SourceFolder = ""
+    $SourceFolder = "",
     [String] [Parameter(Mandatory = $true)]
     $SpecificRuntime,
     [String] [Parameter(Mandatory = $true)]
@@ -35,7 +35,7 @@ Function Main
         $BuildConfiguration = "Release"
     }
 
-    $SourceFolder = Trim-Path $SourceFolder
+    $SourceFolder = Get-TrimedPath $SourceFolder
 
     $isPreRelease = [System.Convert]::ToBoolean($PreRelease)
 

@@ -35,7 +35,7 @@ Function Main
         $BuildConfiguration = "Release"
     }
 
-    $SourceFolder = Trim-Path $SourceFolder
+    $SourceFolder = Get-TrimedPath $SourceFolder
 
     $isPublishSource = [System.Convert]::ToBoolean($PublishSource)
 
