@@ -12,6 +12,10 @@ param (
     $WorkingFolder = "",
     [String] [Parameter(Mandatory = $false)]
     $SourceFolder = ""
+    [String] [Parameter(Mandatory = $true)]
+    $SpecificRuntime,
+    [String] [Parameter(Mandatory = $true)]
+    $UnstableRuntime
 )
 
 Write-Verbose "Entering script BuildNugetPackage.ps1"
@@ -48,7 +52,10 @@ Function Main
 
     Import-Module "$(Split-Path -parent $PSCommandPath)\InstallDNVM.psm1"
 
-    Install-DNVM
+    $isSpecificRuntime = [System.Convert]::ToBoolean($SpecificRuntime)
+    $isUnstableRuntime = [System.Convert]::ToBoolean($UnstableRuntime)
+
+    Install-DNVM -SpecificRuntime $isSpecificRuntime -UnstableRuntime $isUnstableRuntime
 
     $projects = $ProjectName.Trim() -split(" ");
 

@@ -1,5 +1,12 @@
 ﻿function Install-Dnvm
 {
+    param (
+        [bool] [Parameter(Mandatory = $false)]
+        $SpecificRuntime = $false,
+        [bool] [Parameter(Mandatory = $false)]
+        $UnstableRuntime = $false
+    )
+
     Write-Verbose "Entering Method Install-Dnvm"
 
     $dnvm = Get-Command "dnvm" -ErrorAction SilentlyContinue
@@ -38,6 +45,13 @@
     {
         Write-Output "Take DNX version from global.json."
         $dnxVersion = $globalJson.sdk.version
+        $dnxParams = ""
+        if($SpecificRuntime)
+        {
+            $dnxRuntime = $globalJson.sdk.runtime
+            $dnxArch = $globalJson.sdk.architecture
+            $dnxParams = "-r $dnxRuntime -a $dnxArch"
+        }
     }
     else
     {
@@ -45,8 +59,10 @@
         $dnxVersion = "latest"
     }
 
-    Write-Output "Calling: $dnvmPath install $dnxVersion -Persistent"
-    & $dnvmPath install "$dnxVersion" -Persistent
+    $dnxUnstable = &{If($UnstableRuntime){"-u"}}
+
+    Write-Output "Calling: $dnvmPath install $dnxParams $dnxVersion -Persistent"
+    & $dnvmPath install $dnxParams "$dnxVersion" -Persistent $dnxUnstable
 
     Write-Verbose "Leaving script Install-Dnvm"
 }
