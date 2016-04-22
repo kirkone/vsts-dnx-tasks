@@ -47,7 +47,11 @@ The options listed under "**Advanced**" are used to control the behavior of the 
 
 This task is used to create Nuget packages for one or multiple projects. For the fields "**Project Name**", "**Build Configuration**", "**Output Folder**" and "**Working Folder**" please have a look at the "**Build Web**" task.
 
-Within the "**Advanced**" section there is a checkbox for "**Pre Release**". If this is true, the nuget package will build as prerelease with "**VERSIONNUMBER-pre-BUILDNUMBER**" in name.
+Within the "**Advanced**" section there is a checkbox for "**Pre Release**". If this is true, the nuget package will build as prerelease with "**VERSIONNUMBER-pre-BUILDNUMBER**" in name.  
+
+> The "**BUILDNUMBER**" part is taken from the "*Build number format*" under the "*Global*" tab in your build definition settings. This task takes the last number from this string.  
+> I recommend to set the "*Build number format*" to somthing like this:  
+> "**$(BuildDefinitionName)_$(BuildConfiguration)_$(Year:yy)$(DayOfYear)$(Rev:rr)**"
 
 
 ### DNX Tasks Azure SlotSwap
@@ -64,11 +68,25 @@ Please have a look here: [GitHub Issues](https://github.com/kirkone/vsts-dnx-tas
 
 ### Release Notes
 
-#### Version 0.0.18
+#### Version 0.0.20
 
-- Updated Readme file
+- updated Readme file
+- code cleanup
 
-##### DNX Tasks Build Web 0.0.9
+##### DNX Tasks Build Nuget 0.0.4
+
+- added option for "**Source Folder**"
+- fixed project count in console output
+
+##### DNX Tasks Build Web 0.0.11
+
+- fixed project count in console output
+
+#### Version 0.0.19
+
+- updated Readme file
+
+##### DNX Tasks Build Web 0.0.10
 
 - added option for "**Source Folder**"
 - fixed project count in console output
