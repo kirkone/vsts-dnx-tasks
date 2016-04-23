@@ -31,7 +31,7 @@ This task will fail when no project can be found in the specified location.
 
 ### DNX Tasks Publish Web Package
 
-You can publish your website build with the "**Build Web Package**" task to an Azure Web App. To do so you have to select the azure subscription your App is on in the "**Azure Classic Subscription**" field and type in the "**Web App Name**".
+You can publish your website build with the "**Build Web Package**" task to an Azure Web App. To do so you have to select the azure subscription your App is on in the "**Azure Classic Subscription**" field and type in the "**Web App Name**". If you select a "**Web App Location**" the field "**Web App Name**" has prefilled options.
 
 In the "**Deployment Slot**" field specify the target Slot for the deployment. Leave this blank if you do not want to use a deployment slot.
 
@@ -59,6 +59,7 @@ Within the "**Advanced**" section there is a checkbox for "**Pre Release**". If 
 If you use deployment slots in your Azure Website and want to switch the slots after deployment you can use this task.
 
 In "**Azure Classic Subscription**" select the subscription your Website is assigned to.  
+"**Web App Location**" is optional and is only used to have options for "**Web App Name**" prefilled.
 The Name of the Azure Website have to be in "**Web App Name**".  
 Specify the slots you want to swap in the "**From**" and "**To**" fields.
 
@@ -68,6 +69,11 @@ Please have a look here: [GitHub Issues](https://github.com/kirkone/vsts-dnx-tas
 
 ### Release Notes
 
+#### Version 0.0.22
+
+- fixed DNXInstall with "**Specific Runtime**"
+- fixed "**Web App Location**" can not be empty
+
 #### Version 0.0.21
 
 - updated Readme file
@@ -76,10 +82,14 @@ Please have a look here: [GitHub Issues](https://github.com/kirkone/vsts-dnx-tas
 ##### DNX Tasks Build Nuget 0.0.5
 
 - added option for "**Source Folder**"
+- added option for "**Specific Runtime**"
+- added option for "**Unstable Runtime**"
 - fixed project count in console output
 
 ##### DNX Tasks Build Web 0.0.11
 
+- added option for "**Specific Runtime**"
+- added option for "**Unstable Runtime**"
 - fixed project count in console output
 
 ##### DNX Tasks Publish Web 0.0.3
