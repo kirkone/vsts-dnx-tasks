@@ -41,6 +41,7 @@
 
     $globalJson = Get-Content -Path .\global.json -Raw -ErrorAction Ignore | ConvertFrom-Json -ErrorAction Ignore
 
+    $dnxVersion = ""
     $dnxParams = ""
 
     if($globalJson)
@@ -71,8 +72,10 @@
 
     $dnxUnstable = &{If($UnstableRuntime){"-u"}}
 
-    Write-Output "Calling: $dnvmPath install $dnxParams $dnxVersion -Persistent"
-    & $dnvmPath install $dnxParams "$dnxVersion" -Persistent $dnxUnstable
+    $dnxParams = "$dnxParams ""$dnxVersion""".Trim()
+
+    Write-Output "Calling: $dnvmPath install $dnxParams -Persistent"
+    & $dnvmPath install $dnxParams -Persistent $dnxUnstable
 
     Write-Verbose "Leaving script Install-Dnvm"
 }
