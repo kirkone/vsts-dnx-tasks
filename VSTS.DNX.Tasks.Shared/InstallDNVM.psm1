@@ -60,7 +60,7 @@
                 "{0} {1}" -f
                     $(If(-Not [string]::IsNullOrWhiteSpace($dnxRuntime)){"-r $dnxRuntime"}),
                     $(If(-Not [string]::IsNullOrWhiteSpace($dnxArch)){"-a $dnxArch"})
-            )
+            ).Trim()
         }
     }
     else
