@@ -2,7 +2,7 @@
 param (
     [String] [Parameter(Mandatory = $true)]
     $ConnectedServiceName,
-    [String] [Parameter(Mandatory = $true)]
+    [String] [Parameter(Mandatory = $false)]
     $WebSiteLocation,
 
     [String] [Parameter(Mandatory = $true)]
