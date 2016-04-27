@@ -40,7 +40,14 @@ Function Main
     $isStopBeforeDeploy = [System.Convert]::ToBoolean($StopBeforeDeploy)
     $isForceRestart = [System.Convert]::ToBoolean($ForceRestart)
 
-    $website = Get-AzureWebsite @webIdentifier
+    $website = Get-AzureWebsite @webIdentifier -ErrorAction SilentlyContinue 
+
+    # Website not found -> cancel task with error!
+    if(!$website)
+    {
+        Write-Error "Website not found! aborting..."
+        return
+    }
 
     # get the scm url to use with MSDeploy.  By default this will be the second in the array
     $msdeployurl = $website.EnabledHostNames -match 'scm.azurewebsites.net'
