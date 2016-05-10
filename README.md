@@ -69,6 +69,15 @@ Please have a look here: [GitHub Issues](https://github.com/kirkone/vsts-dnx-tas
 
 ### Release Notes
 
+#### Version 0.0.23
+
+##### DNX Tasks Publish Web 0.0.5
+
+- removed dependency to msdeploy
+- changed deployment prozess to Kudu
+- added switch for cleanup destination folder
+- it is now possible to deploy a folder or a .zip file
+
 #### Version 0.0.22
 
 - fixed DNXInstall with "**Specific Runtime**"
