@@ -75,8 +75,15 @@ Function Main
     if(Test-Path $Source -pathtype container)
     {
         Write-Output "Source is no .zip file, create .zip..."
-        $publishZip += "/publish.zip"
-        Compress-Archive -Path "$Source/*" -DestinationPath $publishZip -Force
+        $publishZip = [System.IO.Path]::Combine($env:TMP, ([System.IO.Path]::GetRandomFileName()))
+
+        if (Test-Path $publishZip)
+        {
+            Remove-Item $publishZip
+        }
+
+        Add-Type -Assembly "System.IO.Compression.FileSystem"
+        [System.IO.Compression.ZipFile]::CreateFromDirectory("$Source", "$publishZip")
         Write-Output "    Done."
     }
 
