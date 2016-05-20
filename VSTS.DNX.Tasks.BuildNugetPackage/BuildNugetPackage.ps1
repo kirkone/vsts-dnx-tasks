@@ -41,13 +41,14 @@ Function Main
 
     $OutputFolder = $OutputFolder.Trim('"')
 
+    $versionSuffix = ""
     if($isPreRelease)
     {
         $prefix = "pre-"
 
         $VersionRegex = "\d+"
         $VersionData = [regex]::matches($Env:BUILD_BUILDNUMBER,$VersionRegex)
-        $Env:DNX_BUILD_VERSION = $prefix + $VersionData[0]
+        $versionSuffix = "--version-suffix $prefix $($VersionData[0])"
     }
 
     Import-Module "$(Split-Path -parent $PSCommandPath)\InstallDNVM.psm1"
@@ -75,20 +76,20 @@ Function Main
 
     Write-Output "$($projects.Count) Projects to build"
 
-    Write-Output "dnu restore for:"
+    Write-Output "dotnet restore for:"
     Write-Output $projects | % {"    ""$SourceFolder$($_.Trim('"'))""" }
 
     $projectList = $projects | % {"""$SourceFolder$($_.Trim('"'))""" } | & {"$input"}
-    Invoke-Expression "& dnu restore $projectList --no-cache"
+    Invoke-Expression "& dotnet restore $projectList --no-cache"
 
     pack($projectList)
 }
 
 Function pack($project)
 {
-    Write-Output "dnu pack for:"
+    Write-Output "dotnet pack for:"
     Write-Output $($project -split(" ") | % { "    $_" })
-    Invoke-Expression "& dnu pack $project --configuration $BuildConfiguration --out ""$OutputFolder"""
+    Invoke-Expression "& dotnet pack $project --configuration $BuildConfiguration --out ""$OutputFolder""" $versionSuffix
 }
 
 Main
