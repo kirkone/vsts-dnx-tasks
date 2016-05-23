@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "vsts-dnx-tasks",
     "name": "VSTS DNX Tasks",
-    "version": "0.0.25",
+    "version": "0.1.0",
     "publisher": "kirkone",
     "public": true,
     "targets": [
@@ -14,12 +14,13 @@
         "vso.build",
         "vso.serviceendpoint"
     ],
-    "description": "Build and Release Management extensions that enable you to package and publish dnx projects",
+    "description": "Build and Release Management extensions that enable you to package and publish projects using the dotnet cli.",
     "categories": [
         "Build and release"
     ],
     "tags": [
         "DNX",
+        "dotnet",
         "ASP.NET 5",
         "Publish",
         "Package"
