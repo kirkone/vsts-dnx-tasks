@@ -34,7 +34,6 @@
   <ItemGroup>
     <Compile Include="Common.psm1" />
     <Compile Include="InstallDotnet.psm1" />
-    <Compile Include="InstallDNVM.psm1" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="Build" />

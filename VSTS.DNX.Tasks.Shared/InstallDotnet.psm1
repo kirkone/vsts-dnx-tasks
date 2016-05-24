@@ -1,81 +1,42 @@
-﻿function Install-Dnvm
+﻿function Install-Dotnet
 {
     param (
-        [bool] [Parameter(Mandatory = $false)]
-        $SpecificRuntime = $false,
-        [bool] [Parameter(Mandatory = $false)]
-        $UnstableRuntime = $false
     )
 
-    Write-Verbose "Entering Method Install-Dnvm"
+    Write-Verbose "Entering Method Install-Dotnet"
 
-    $dnvm = Get-Command "dnvm" -ErrorAction SilentlyContinue
-    $dnvmPath = ".\Tools\dnvm.ps1"
+    $dotnet = Get-Command "dotnet" -ErrorAction SilentlyContinue
+    $dotnetPath = ""
 
-    if ($dnvm -ne $null)
+    if ($dotnet -ne $null)
     {
-        Write-Output "DNVM found:"
-        Write-Output "    $($dnvm.Path)"
-        $dnvmPath = $dnvm.Path
+        Write-Output "Dotnet found:"
+        Write-Output "    $($dotnet.Path)"
+        $dotnetPath = $dotnet.Path
     }
     else
     {
-        Write-Output "DNVM not found, instlling..."
+        Write-Output "Dotnet not found, instlling..."
 
-        $dnvmPs1Path = "$PSScriptRoot\Tools"
-        if (-not (Test-Path -PathType Container $dnvmPs1Path))
+        $dotnetPs1Path = "$PSScriptRoot\Tools"
+        if (-not (Test-Path -PathType Container $dotnetPs1Path))
         {
-            New-Item -ItemType Directory -Path $dnvmPs1Path
+            New-Item -ItemType Directory -Path $dotnetPs1Path
         }
 
-        $dnvmPs1Path = "$dnvmPs1Path\dnvm.ps1"
+        $dotnetPs1Path = "$dotnetPs1Path\dotnet-install.ps1"
 
         $webClient = New-Object System.Net.WebClient
         $webClient.Proxy = [System.Net.WebRequest]::DefaultWebProxy
         $webClient.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
-        Write-Output "Downloading DNVM.ps1 to $dnvmPs1Path"
-        $webClient.DownloadFile("https://raw.githubusercontent.com/aspnet/Home/dev/dnvm.ps1", $dnvmPs1Path)
+        Write-Output "Downloading dotnet-install.ps1 to $dotnetPs1Path"
+        $webClient.DownloadFile("https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.ps1", $dotnetPs1Path)
 
-        $dnvmPath = $dnvmPs1Path
+        $dotnetPath = $dotnetPs1Path
+
+        Write-Output "Calling: $dotnetPath"
+        & "$dotnetPath"
     }
-
-    $globalJson = Get-Content -Path .\global.json -Raw -ErrorAction Ignore | ConvertFrom-Json -ErrorAction Ignore
-
-    $dnxVersion = ""
-    $dnxParams = ""
-
-    if($globalJson)
-    {
-        Write-Output "Take DNX version from global.json."
-        $dnxVersion = $globalJson.sdk.version
-        if($SpecificRuntime)
-        {
-            $dnxRuntime = $globalJson.sdk.runtime
-            $dnxArch = $globalJson.sdk.architecture
-
-            Write-Output "    Specific Runtime:"
-            Write-Output "        Runtime: $dnxRuntime"
-            Write-Output "        Architecture: $dnxArch"
-
-            $dnxParams =  (
-                "{0} {1}" -f
-                    $(If(-Not [string]::IsNullOrWhiteSpace($dnxRuntime)){"-r $dnxRuntime"}),
-                    $(If(-Not [string]::IsNullOrWhiteSpace($dnxArch)){"-a $dnxArch"})
-            ).Trim()
-        }
-    }
-    else
-    {
-        Write-Output "Unable to locate global.json to determine using 'latest'"
-        $dnxVersion = "latest"
-    }
-
-    $dnxUnstable = &{If($UnstableRuntime){"-u"}}
-
-    $dnxParams = "$dnxParams ""$dnxVersion""".Trim()
-
-    Write-Output "Calling: $dnvmPath install $dnxParams -Persistent"
-    & $dnvmPath install $dnxParams -Persistent $dnxUnstable
 
     Write-Verbose "Leaving script Install-Dnvm"
 }
