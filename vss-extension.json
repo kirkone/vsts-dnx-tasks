@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "vsts-dnx-tasks",
     "name": "VSTS DNX Tasks",
-    "version": "0.0.25",
+    "version": "0.1.1",
     "publisher": "kirkone",
     "public": true,
     "targets": [
@@ -14,13 +14,14 @@
         "vso.build",
         "vso.serviceendpoint"
     ],
-    "description": "Build and Release Management extensions that enable you to package and publish dnx projects",
+    "description": "Build and Release Management extensions that enable you to package and publish projects using the dotnet cli.",
     "categories": [
         "Build and release"
     ],
     "tags": [
-        "DNX",
-        "ASP.NET 5",
+        "ASP.NET Core",
+        "dotnet",
+        "Build",
         "Publish",
         "Package"
     ],
@@ -64,7 +65,7 @@
             "contentType": "text/plain"
         },
         {
-            "path": "VSTS.DNX.Tasks.BuildWebPackage/InstallDNVM.psm1",
+            "path": "VSTS.DNX.Tasks.BuildWebPackage/InstallDotnet.psm1",
             "contentType": "text/plain"
         },
         {
@@ -82,7 +83,7 @@
             "contentType": "text/plain"
         },
         {
-            "path": "VSTS.DNX.Tasks.BuildNugetPackage/InstallDNVM.psm1",
+            "path": "VSTS.DNX.Tasks.BuildNugetPackage/InstallDotnet.psm1",
             "contentType": "text/plain"
         },
         {

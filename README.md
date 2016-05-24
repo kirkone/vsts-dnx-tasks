@@ -1,6 +1,6 @@
 # VSTS DNX Tasks
 
-This extension allows you to make builds with the new ASP.NET 5 tools easier.  
+This extension allows you to make builds with the new ASP.NET Core tools easier.  
 This extension includes the following tasks:
 
 - DNX Tasks Build Web Package
@@ -39,7 +39,8 @@ In the "**Deployment Slot**" field specify the target Slot for the deployment. L
 
 > Note: the Build Task will put the output in subfolders with the project name, so you have to point at these. For example you build "*Sample.Web*" so your "**Source Folder**" should look like this: "**$(Build.StagingDirectory)\Publish\Sample.Web**".  
 
-The options listed under "**Advanced**" are used to control the behavior of the Web App before and after the deployment.
+Within the "**Advanced**" section you have the field for "**Destination**". This is the folder where the application will be in the Azure environment. Default value is "site/wwwroot". You can change this for example to deploy a WebJob to your already deployed website.  
+The other options listed under "**Advanced**" are used to control the behavior of the Web App before and after the deployment.
 
 > If only "**Stop Before Deployment**" is checked you have to start your App manually later on.
 
@@ -69,53 +70,7 @@ Please have a look here: [GitHub Issues](https://github.com/kirkone/vsts-dnx-tas
 
 ### Release Notes
 
-#### Version 0.0.23
+#### Version 0.1.1
 
-##### DNX Tasks Publish Web 0.0.5
+- migrated from RC1 dnvm/dnu to RC2 and dotnet cli
 
-- removed dependency to msdeploy
-- changed deployment prozess to Kudu
-- added switch for cleanup destination folder
-- it is now possible to deploy a folder or a .zip file
-
-#### Version 0.0.22
-
-- fixed DNXInstall with "**Specific Runtime**"
-- fixed "**Web App Location**" can not be empty
-
-#### Version 0.0.21
-
-- updated Readme file
-- code cleanup
-
-##### DNX Tasks Build Nuget 0.0.5
-
-- added option for "**Source Folder**"
-- added option for "**Specific Runtime**"
-- added option for "**Unstable Runtime**"
-- fixed project count in console output
-
-##### DNX Tasks Build Web 0.0.11
-
-- added option for "**Specific Runtime**"
-- added option for "**Unstable Runtime**"
-- fixed project count in console output
-
-##### DNX Tasks Publish Web 0.0.3
-
-- added option for "**Web App Location**"
-
-##### DNX Tasks Azure SlotSwap 0.0.3
-
-- added option for "**Web App Location**"
-
-
-
-#### Version 0.0.19
-
-- updated Readme file
-
-##### DNX Tasks Build Web 0.0.10
-
-- added option for "**Source Folder**"
-- fixed project count in console output

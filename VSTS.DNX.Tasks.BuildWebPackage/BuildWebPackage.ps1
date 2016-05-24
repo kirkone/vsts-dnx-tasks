@@ -11,11 +11,7 @@ param (
     [String] [Parameter(Mandatory = $false)]
     $WorkingFolder = "",
     [String] [Parameter(Mandatory = $false)]
-    $SourceFolder = "",
-    [String] [Parameter(Mandatory = $true)]
-    $SpecificRuntime,
-    [String] [Parameter(Mandatory = $true)]
-    $UnstableRuntime
+    $SourceFolder = ""
 )
 
 Write-Verbose "Entering script BuildWebPackage.ps1"
@@ -37,18 +33,11 @@ Function Main
 
     $SourceFolder = Get-TrimedPath $SourceFolder
 
-    $isPublishSource = [System.Convert]::ToBoolean($PublishSource)
-
     $OutputFolder = $OutputFolder.Trim('"')
 
-    Import-Module "$(Split-Path -parent $PSCommandPath)\InstallDNVM.psm1"
+    Import-Module "$(Split-Path -parent $PSCommandPath)\InstallDotnet.psm1"
 
-    $isSpecificRuntime = [System.Convert]::ToBoolean($SpecificRuntime)
-    $isUnstableRuntime = [System.Convert]::ToBoolean($UnstableRuntime)
-
-    Install-DNVM -SpecificRuntime $isSpecificRuntime -UnstableRuntime $isUnstableRuntime
-
-    $Env:DNU_PUBLISH_AZURE = $true
+    Install-Dotnet
 
     $projects = $ProjectName.Trim() -split(" ");
 
@@ -68,36 +57,24 @@ Function Main
 
     Write-Output "$($projects.Count) Projects to build"
 
-    Write-Output "dnu restore for:"
+    Write-Output "dotnet restore for:"
     Write-Output $projects | % {"    ""$SourceFolder$($_.Trim('"'))""" }
 
     $projectList = $projects | % {"""$SourceFolder$($_.Trim('"'))""" } | & {"$input"}
-    Invoke-Expression "& dnu restore $projectList --no-cache"
+    Invoke-Expression "& dotnet restore $projectList"
 
-    build($projectList)
+    Write-Output "dotnet build for:"
+    Write-Output $($projectList -split(" ") | % { "    $_" })
+    Invoke-Expression "& dotnet build $projectList -c $BuildConfiguration"
 
     foreach($project in $projects)
     {
         $p = "$SourceFolder$($project.Trim('"'))"
-        publish($p)
+        $outDir = (Get-Item $p).Name
+        Write-Output "dotnet publish for:"
+        Write-Output "    $p"
+        Invoke-Expression "& dotnet publish $p -c $BuildConfiguration -o ""$OutputFolder\$outDir"" --no-build"
     }
-}
-
-Function build($project)
-{
-    Write-Output "dnu build for:"
-    Write-Output $($project -split(" ") | % { "    $_" })
-    Invoke-Expression "& dnu build $project --configuration $BuildConfiguration"
-}
-
-Function publish($project)
-{
-    $outDir = (Get-Item $project).Name
-    $noSource = &{If(!$isPublishSource){"--no-source"}}
-
-    Write-Output "dnu publish for:"
-    Write-Output $($project -split(" ") | % { "    $_" })
-    Invoke-Expression "& dnu publish $project --configuration $BuildConfiguration --out ""$OutputFolder\$outDir"" --runtime active $noSource"
 }
 
 Main
