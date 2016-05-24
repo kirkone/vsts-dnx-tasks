@@ -37,8 +37,6 @@ Function Main
 
     $SourceFolder = Get-TrimedPath $SourceFolder
 
-    $isPublishSource = [System.Convert]::ToBoolean($PublishSource)
-
     $OutputFolder = $OutputFolder.Trim('"')
 
     Import-Module "$(Split-Path -parent $PSCommandPath)\InstallDNVM.psm1"
@@ -47,8 +45,6 @@ Function Main
     $isUnstableRuntime = [System.Convert]::ToBoolean($UnstableRuntime)
 
     Install-DNVM -SpecificRuntime $isSpecificRuntime -UnstableRuntime $isUnstableRuntime
-
-    $Env:DNU_PUBLISH_AZURE = $true
 
     $projects = $ProjectName.Trim() -split(" ");
 
@@ -68,11 +64,11 @@ Function Main
 
     Write-Output "$($projects.Count) Projects to build"
 
-    Write-Output "dnu restore for:"
+    Write-Output "dotnet restore for:"
     Write-Output $projects | % {"    ""$SourceFolder$($_.Trim('"'))""" }
 
     $projectList = $projects | % {"""$SourceFolder$($_.Trim('"'))""" } | & {"$input"}
-    Invoke-Expression "& dnu restore $projectList --no-cache"
+    Invoke-Expression "& dotnet restore $projectList"
 
     build($projectList)
 
@@ -85,19 +81,18 @@ Function Main
 
 Function build($project)
 {
-    Write-Output "dnu build for:"
+    Write-Output "dotnet build for:"
     Write-Output $($project -split(" ") | % { "    $_" })
-    Invoke-Expression "& dnu build $project --configuration $BuildConfiguration"
+    Invoke-Expression "& dotnet build $project -c $BuildConfiguration"
 }
 
 Function publish($project)
 {
     $outDir = (Get-Item $project).Name
-    $noSource = &{If(!$isPublishSource){"--no-source"}}
 
-    Write-Output "dnu publish for:"
+    Write-Output "dotnet publish for:"
     Write-Output $($project -split(" ") | % { "    $_" })
-    Invoke-Expression "& dnu publish $project --configuration $BuildConfiguration --out ""$OutputFolder\$outDir"" --runtime active $noSource"
+    Invoke-Expression "& dotnet publish $project -c $BuildConfiguration -o ""$OutputFolder\$outDir"" --no-build"
 }
 
 Main
