@@ -83,7 +83,7 @@
             "name": "Destination",
             "label": "Destination",
             "type": "string",
-            "defaultValue": "site",
+            "defaultValue": "site/wwwroot",
             "helpMarkdown": "The destination folder where to put the files in the Azure Web App. Default is 'site",
             "required": true,
             "groupName": "advanced"
