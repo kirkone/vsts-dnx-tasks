@@ -1,7 +1,7 @@
 {
     "id": "E49FA2E6-90E8-4747-9F9B-AD15AECC0F05",
     "name": "DNX.Tasks.SlotSwap",
-    "friendlyName": "DNX Tasks Azure SlotSwap",
+    "friendlyName": "DNX Tasks Azure SlotSwap RC1",
     "description": "Swap a slot in Azure web site deployment slots.",
     "helpMarkDown": "Version: 0.0.4",
     "category": "Deploy",

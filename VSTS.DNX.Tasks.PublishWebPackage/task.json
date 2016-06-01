@@ -1,7 +1,7 @@
 {
     "id": "EDEE4D57-FD49-466B-BFC3-1CBBA4E8C24A",
     "name": "DNX.Tasks.PublishWebPackage",
-    "friendlyName": "DNX Tasks Azure PublishWebPackage",
+    "friendlyName": "DNX Tasks Azure PublishWebPackage RC1",
     "description": "Publish a DNX package to Azure Website",
     "helpMarkDown": "Version: 0.0.7",
     "category": "Deploy",

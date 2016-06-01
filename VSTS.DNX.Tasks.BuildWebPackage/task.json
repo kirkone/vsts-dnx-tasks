@@ -1,7 +1,7 @@
 {
     "id": "18E7AF2F-A100-4868-9C88-BB3A07B3B3BE",
     "name": "DNX.Tasks.BuildWebPackage",
-    "friendlyName": "DNX Tasks Build Web Package",
+    "friendlyName": "DNX Tasks Build Web Package RC1",
     "description": "Build a package with dnx for Deployment",
     "helpMarkDown": "Version: 0.0.11",
     "category": "Build",

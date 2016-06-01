@@ -1,7 +1,7 @@
 {
     "id": "03943746-C0F7-4ACA-92EB-5F20EB9C130F",
     "name": "DNX.Tasks.BuildNugetPackage",
-    "friendlyName": "DNX Tasks Build Nuget Package",
+    "friendlyName": "DNX Tasks Build Nuget Package RC1",
     "description": "Build a Nuget package with dnx.",
     "helpMarkDown": "Version: 0.0.5",
     "category": "Build",
