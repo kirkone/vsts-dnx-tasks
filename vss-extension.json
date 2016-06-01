@@ -1,7 +1,7 @@
 {
     "manifestVersion": 1,
-    "id": "vsts-dnx-tasks",
-    "name": "VSTS DNX Tasks",
+    "id": "vsts-dnx-tasks-rc1",
+    "name": "VSTS DNX Tasks RC1",
     "version": "0.0.25",
     "publisher": "kirkone",
     "public": true,
@@ -14,7 +14,7 @@
         "vso.build",
         "vso.serviceendpoint"
     ],
-    "description": "Build and Release Management extensions that enable you to package and publish dnx projects",
+    "description": "Build and Release Management extensions that enable you to package and publish dnx RS1 projects",
     "categories": [
         "Build and release"
     ],

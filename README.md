@@ -1,5 +1,10 @@
 # VSTS DNX Tasks
 
+> <font color='red'>This is only for projects based on DNVM and DNU from Asp.Net 5 RC1!  
+Please use this for projects based on RC2 and onwards:</font>
+
+> [VSTS DNX Tasks](https://marketplace.visualstudio.com/items?itemName=KirKone.vsts-dnx-tasks)
+
 This extension allows you to make builds with the new ASP.NET 5 tools easier.  
 This extension includes the following tasks:
 
