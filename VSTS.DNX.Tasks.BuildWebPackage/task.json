@@ -1,15 +1,15 @@
 {
-    "id": "18E7AF2F-A100-4868-9C88-BB3A07B3B3BE",
+    "id": "B091A6CC-3772-4E34-9733-2801CA99DF39",
     "name": "DNX.Tasks.BuildWebPackage",
     "friendlyName": "DNX Tasks Build Web Package RC1",
     "description": "Build a package with dnx for Deployment",
-    "helpMarkDown": "Version: 0.0.11",
+    "helpMarkDown": "Version: 0.0.12",
     "category": "Build",
     "author": "Kirsten Kluge",
     "version": {
         "Major": 0,
         "Minor": 0,
-        "Patch": 11
+        "Patch": 12
     },
     "visibility": [
         "Build"

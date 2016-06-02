@@ -1,15 +1,15 @@
 {
-    "id": "EDEE4D57-FD49-466B-BFC3-1CBBA4E8C24A",
+    "id": "E13091F0-44D7-4891-BF4A-A73E09231422",
     "name": "DNX.Tasks.PublishWebPackage",
     "friendlyName": "DNX Tasks Azure PublishWebPackage RC1",
     "description": "Publish a DNX package to Azure Website",
-    "helpMarkDown": "Version: 0.0.7",
+    "helpMarkDown": "Version: 0.0.8",
     "category": "Deploy",
     "author": "Kirsten Kluge",
     "version": {
         "Major": 0,
         "Minor": 0,
-        "Patch": 7
+        "Patch": 8
     },
     "visibility": [
         "Build",

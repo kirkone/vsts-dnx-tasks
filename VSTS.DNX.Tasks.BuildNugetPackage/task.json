@@ -1,15 +1,15 @@
 {
-    "id": "03943746-C0F7-4ACA-92EB-5F20EB9C130F",
+    "id": "787F5AA8-6065-4756-9247-235596A98CF9",
     "name": "DNX.Tasks.BuildNugetPackage",
     "friendlyName": "DNX Tasks Build Nuget Package RC1",
     "description": "Build a Nuget package with dnx.",
-    "helpMarkDown": "Version: 0.0.5",
+    "helpMarkDown": "Version: 0.0.6",
     "category": "Build",
     "author": "Kirsten Kluge",
     "version": {
         "Major": 0,
         "Minor": 0,
-        "Patch": 5
+        "Patch": 6
     },
     "visibility": [
         "Build"
