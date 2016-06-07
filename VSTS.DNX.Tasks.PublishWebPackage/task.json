@@ -3,13 +3,13 @@
     "name": "DNX.Tasks.PublishWebPackage",
     "friendlyName": "DNX Tasks Azure PublishWebPackage",
     "description": "Publish a Dotnet package to Azure Website",
-    "helpMarkDown": "Version: 0.1.2",
+    "helpMarkDown": "Version: 0.1.3",
     "category": "Deploy",
     "author": "Kirsten Kluge",
     "version": {
         "Major": 0,
         "Minor": 1,
-        "Patch": 2
+        "Patch": 3
     },
     "visibility": [
         "Build",
@@ -61,14 +61,15 @@
             "type": "pickList",
             "label": "Deployment Slot",
             "defaultValue": "",
-            "helpMarkdown": "Slotname where to deploy. Leave empty if not used.",
+            "helpMarkdown": "Slotname where to deploy. Leave empty if not used. Set 'production' is you want to target the default slot.",
             "required": false,
             "properties": {
                 "EditableOptions": "True"
             },
             "options": {
                 "Dev": "Dev",
-                "Staging": "Staging"
+                "Staging": "Staging",
+                "Production": "Production"
             }
         },
         {
