@@ -11,7 +11,9 @@ param (
     [String] [Parameter(Mandatory = $false)]
     $WorkingFolder = "",
     [String] [Parameter(Mandatory = $false)]
-    $SourceFolder = ""
+    $SourceFolder = "",
+    [string] [Parameter(Mandatory = $true)]
+    $SkipDotNetInstall
 )
 
 Write-Verbose "Entering script BuildNugetPackage.ps1"
@@ -34,6 +36,7 @@ Function Main
     $SourceFolder = Get-TrimedPath $SourceFolder
 
     $isPreRelease = [System.Convert]::ToBoolean($PreRelease)
+    $isSkipDotNetInstall = [System.Convert]::ToBoolean($SkipDotNetInstall)
 
     $OutputFolder = $OutputFolder.Trim('"')
 
@@ -47,9 +50,12 @@ Function Main
         $versionSuffix = "--version-suffix $prefix$($VersionData[0])"
     }
 
-    Import-Module "$(Split-Path -parent $PSCommandPath)\InstallDotnet.psm1"
+    if($isSkipDotNetInstall)
+    {
+        Import-Module "$(Split-Path -parent $PSCommandPath)\InstallDotnet.psm1"
 
-    Install-Dotnet
+        Install-Dotnet
+    }
 
     $projects = $ProjectName.Trim() -split(" ");
 
