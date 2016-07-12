@@ -25,7 +25,9 @@ Please enter a relative path to the "**Working Folder**".
 
 The Task will look in "**Working folder**/**Source Folder**/**Project Name**" for a project.json and starts building this project.  
 
-This task will fail when no project can be found in the specified location.
+This task will fail when no project can be found in the specified location.  
+
+If there is no need to install the "**dotnet cli**" please check the "**Skip DotNet CLI Install**" checkbox.  
 
 > All your npm, grunt, bower and so on tasks should be before this task to make sure all the generated content is included in the output.
 
@@ -50,6 +52,8 @@ This task is used to create Nuget packages for one or multiple projects. For the
 
 Within the "**Advanced**" section there is a checkbox for "**Pre Release**". If this is true, the nuget package will build as prerelease with "**VERSIONNUMBER-pre-BUILDNUMBER**" in name.  
 
+If there is no need to install the "**dotnet cli**" please check the "**Skip DotNet CLI Install**" checkbox.  
+
 > The "**BUILDNUMBER**" part is taken from the "*Build number format*" under the "*Global*" tab in your build definition settings. This task takes the last number from this string.  
 > I recommend to set the "*Build number format*" to somthing like this:  
 > "**$(BuildDefinitionName)_$(BuildConfiguration)_$(Year:yy)$(DayOfYear)$(Rev:rr)**"
@@ -69,6 +73,10 @@ Specify the slots you want to swap in the "**From**" and "**To**" fields.
 Please have a look here: [GitHub Issues](https://github.com/kirkone/vsts-dnx-tasks/issues)  
 
 ### Release Notes
+
+#### Version 0.1.4
+
+- Added option to skip installation of the dotnet cli in the BuildNuGetPackage and BuildWebPackage task
 
 #### Version 0.1.1
 
