@@ -21,7 +21,6 @@ All the results of the build process will put in the folder specified in "**Outp
 Under the "**Advanced**" group you can decide if you want the source code to be included in the build output with the "**Publish Source**" switch.
 Also the "**Working Folder**" can be specified here. Usual this should be the folder where your .sln file is.  
 The field "**Source Folder**" is used to specify a subfolder where your projects are located. The default value is "src" like in a standard asp.net core project. If your project folders are direct in your "**Working Folder**" leave this field blank.  
-Please enter a relative path to the "**Working Folder**".
 
 The Task will look in "**Working folder**/**Source Folder**/**Project Name**" for a project.json and starts building this project.  
 
@@ -73,6 +72,11 @@ Specify the slots you want to swap in the "**From**" and "**To**" fields.
 Please have a look here: [GitHub Issues](https://github.com/kirkone/vsts-dnx-tasks/issues)  
 
 ### Release Notes
+
+#### Version 0.1.5
+
+- Fixed error with empty paths for the "**Source Folder**" parrameters  
+- Added logic to detect absolute paths to prevent leading ".\" for absolute paths  
 
 #### Version 0.1.4
 
