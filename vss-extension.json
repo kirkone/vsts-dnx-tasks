@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "vsts-dnx-tasks",
     "name": "VSTS DNX Tasks",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "publisher": "kirkone",
     "public": true,
     "targets": [
@@ -111,6 +111,16 @@
         },
         {
             "path": "VSTS.DNX.Tasks.SlotSwap/icon.png"
+        },
+
+        {
+            "path": "VSTS.DNX.Tasks.ClearNugetCache/ClearNugetCache.ps1"
+        },
+        {
+            "path": "VSTS.DNX.Tasks.ClearNugetCache/task.json"
+        },
+        {
+            "path": "VSTS.DNX.Tasks.ClearNugetCache/icon.png"
         }
     ],
     "contributions": [
@@ -155,6 +165,17 @@
             ],
             "properties": {
                 "name": "VSTS.DNX.Tasks.SlotSwap"
+            }
+        },
+
+        {
+            "id": "VSTS.DNX.Tasks.ClearNugetCache",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "VSTS.DNX.Tasks.ClearNugetCache"
             }
         }
     ]
