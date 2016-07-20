@@ -3,7 +3,7 @@
     "name": "DNX.Tasks.ClearNugetCache",
     "friendlyName": "DNX Tasks NuGet Clear Cache",
     "description": "Clear out the package cache for NuGet.",
-    "helpMarkDown": "Version: 0.1.6",
+    "helpMarkDown": "Version: 0.1.6\n## Caution:\nUse this only when you exactly know what you are doing!\n  This will clear the package cache and if there are any other build processes running at the same time at the same mashine **very bad things** will happen!",
     "category": "Package",
     "author": "Kirsten Kluge",
     "version": {
