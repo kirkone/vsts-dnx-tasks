@@ -16,7 +16,7 @@
     }
     else
     {
-        Write-Output "Dotnet not found, instlling..."
+        Write-Output "Dotnet not found, installing..."
 
         $dotnetPs1Path = "$PSScriptRoot\Tools"
         if (-not (Test-Path -PathType Container $dotnetPs1Path))
@@ -38,5 +38,5 @@
         & "$dotnetPath"
     }
 
-    Write-Verbose "Leaving script Install-Dnvm"
+    Write-Verbose "Leaving Method Install-Dotnet"
 }
