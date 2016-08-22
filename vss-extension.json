@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "vsts-dnx-tasks",
     "name": "VSTS DNX Tasks",
-    "version": "0.1.6",
+    "version": "0.1.7",
     "publisher": "kirkone",
     "public": true,
     "targets": [
@@ -121,6 +121,16 @@
         },
         {
             "path": "VSTS.DNX.Tasks.ClearNugetCache/icon.png"
+        },
+
+        {
+            "path": "VSTS.DNX.Tasks.GenerateChangeLog/GenerateChangeLog.ps1"
+        },
+        {
+            "path": "VSTS.DNX.Tasks.GenerateChangeLog/task.json"
+        },
+        {
+            "path": "VSTS.DNX.Tasks.GenerateChangeLog/icon.png"
         }
     ],
     "contributions": [
@@ -176,6 +186,17 @@
             ],
             "properties": {
                 "name": "VSTS.DNX.Tasks.ClearNugetCache"
+            }
+        },
+
+        {
+            "id": "VSTS.DNX.Tasks.GenerateChangeLog",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "VSTS.DNX.Tasks.GenerateChangeLog"
             }
         }
     ]

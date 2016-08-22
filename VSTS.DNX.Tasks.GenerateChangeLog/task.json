@@ -1,0 +1,38 @@
+{
+    "id": "6E9144D5-E822-4838-BE87-CA5F8FEF046B",
+    "name": "DNX.Tasks.GenerateChangeLog",
+    "friendlyName": "DNX Tasks Generate Change Log",
+    "description": "Generate a markdown file with all changeset for this build.",
+    "helpMarkDown": "Version: 0.1.7",
+    "category": "Build",
+    "author": "Kirsten Kluge",
+    "version": {
+        "Major": 0,
+        "Minor": 1,
+        "Patch": 7
+    },
+    "visibility": [
+        "Build"
+    ],
+    "demands": [],
+    "minimumAgentVersion": "1.99.0",
+    "groups": [],
+    "inputs": [
+        {
+            "name": "OutputFolder",
+            "label": "Output Folder",
+            "type": "filePath",
+            "defaultValue": "$(Build.StagingDirectory)\\Publish\\ChangeLog.md",
+            "helpMarkdown": "Where to put the build output.",
+            "required": true
+        }
+    ],
+    "instanceNameFormat": "DNX Tasks Generate Change Log",
+    "execution": {
+        "PowerShell": {
+            "target": "$(currentDirectory)\\GenerateChangeLog.ps1",
+            "argumentFormat": "",
+            "workingDirectory": "$(currentDirectory)"
+        }
+    }
+}
