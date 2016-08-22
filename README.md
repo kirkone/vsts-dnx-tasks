@@ -96,6 +96,10 @@ Please have a look here: [GitHub Issues](https://github.com/kirkone/vsts-dnx-tas
 
 ### Release Notes
 
+#### Version 0.1.8
+
+- Fixed error with authorization.
+
 #### Version 0.1.7
 
 - Added Task to generate a Change Log file.
