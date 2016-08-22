@@ -16,15 +16,65 @@
     ],
     "demands": [],
     "minimumAgentVersion": "1.99.0",
-    "groups": [],
+    "groups": [
+        {
+            "name": "markdown",
+            "displayName": "Markdown",
+            "isExpanded": true
+        },
+        {
+            "name": "json",
+            "displayName": "JSON",
+            "isExpanded": true
+        }
+
+    ],
     "inputs": [
         {
-            "name": "OutputFolder",
-            "label": "Output Folder",
+            "name": "OutputFile",
+            "label": "Output File",
             "type": "filePath",
-            "defaultValue": "$(Build.StagingDirectory)\\Publish\\ChangeLog.md",
-            "helpMarkdown": "Where to put the build output.",
+            "defaultValue": "$(Build.StagingDirectory)\\ChangeLog.md",
+            "helpMarkdown": "Location and name of the file to write.",
             "required": true
+        },
+        {
+            "name": "CreateMdFile",
+            "type": "boolean",
+            "label": "Create MarkDown File",
+            "defaultValue": "true",
+            "required": true,
+            "helpMarkDown": "Check this if you want to generate the Change Log in Markdown format.",
+            "groupName": "markdown"
+        },
+        {
+            "name": "IncludeLinks",
+            "type": "boolean",
+            "label": "Links to Commits",
+            "defaultValue": "false",
+            "required": true,
+            "helpMarkDown": "Check this if you want to include links to the commits.",
+            "groupName": "markdown",
+            "visibleRule": "CreateMdFile = true"
+        },
+        {
+            "name": "AppendMdFile",
+            "type": "boolean",
+            "label": "Append To .md File",
+            "defaultValue": "false",
+            "required": true,
+            "helpMarkDown": "When checked the new contend will be added to an existing file, otherwise the file will be overwritten.",
+            "groupName": "markdown",
+            "visibleRule": "CreateMdFile = true"
+        },
+        {
+            "name": "CreateJsonFile",
+            "type": "boolean",
+            "label": "Create JSON File",
+            "defaultValue": "false",
+            "required": true,
+            "helpMarkDown": "Check this if you want to generate the Change Log in JSON format.",
+            "groupName": "json"
         }
     ],
     "instanceNameFormat": "DNX Tasks Generate Change Log",
