@@ -7,6 +7,8 @@ This extension includes the following tasks:
 - DNX Tasks Publish Web Package
 - DNX Tasks Build Nuget Package
 - DNX Tasks Azure SlotSwap
+- DNX Tasks Clear NuGet Cache
+- DNX Tasks Generate Change Log
 
 ### DNX Tasks Build Web
 
@@ -67,11 +69,40 @@ In "**Azure Classic Subscription**" select the subscription your Website is assi
 The Name of the Azure Website have to be in "**Web App Name**".  
 Specify the slots you want to swap in the "**From**" and "**To**" fields.
 
+### DNX Tasks Clear NuGet Cache
+
+For some reasons it can be necessary to clean up the NuGet cache folder.  
+This task will try to detect the location of the folder by it self.  
+The Folder can be overwritten by using the "**NuGet Cache Path**" field.  
+
+> #### Caution: 
+> Use this only when you exactly know what you are doing!  
+> This will clear the package cache and if there are any other build processes running at the same time at the same mashine **very bad things** will happen!
+
+### DNX Tasks Generate Change Log
+
+To get a Change Log file with all commits for the actual build use this task.  
+The "**Output File**" field specifies the name and the location where the file will be written.  
+To get a Markdown file check the "**Create MarkDown File**" field.  
+When "**Links to Commits**" is checked the Markdown file includes links to every commit mentioned in the change log.  
+To get the new content appended to an existing file check "**Append To .md File**".  
+Use "**Create JSON File**" to get the information about the commits as a .json file. The .json file will use the same value from the "**Output File**" field apart from the file ending .json
+
+> This task only writes a file. You have to take care of it by your self. For example add it to your build output.
+
 ### Questions, Recommendations, Issues?
 
 Please have a look here: [GitHub Issues](https://github.com/kirkone/vsts-dnx-tasks/issues)  
 
 ### Release Notes
+
+#### Version 0.1.7
+
+- Added Task to generate a Change Log file.
+
+#### Version 0.1.6
+
+- Added Task to clear the Nuget package cache on the Build Server.
 
 #### Version 0.1.5
 
