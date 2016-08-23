@@ -88,6 +88,8 @@ When "**Links to Commits**" is checked the Markdown file includes links to every
 To get the new content appended to an existing file check "**Append To .md File**".  
 Use "**Create JSON File**" to get the information about the commits as a .json file. The .json file will use the same value from the "**Output File**" field apart from the file ending .json
 
+To get this task working script access for the OAuth token has to be enabled. To do so, go to the **Options** tab of the build definition and select **Allow Scripts to Access OAuth Token**.
+
 > This task only writes a file. You have to take care of it by your self. For example add it to your build output.
 
 ### Questions, Recommendations, Issues?
@@ -95,6 +97,10 @@ Use "**Create JSON File**" to get the information about the commits as a .json f
 Please have a look here: [GitHub Issues](https://github.com/kirkone/vsts-dnx-tasks/issues)  
 
 ### Release Notes
+
+#### Version 0.1.9
+
+- Added Warning for not having access to the OAuth token when needed
 
 #### Version 0.1.8
 
