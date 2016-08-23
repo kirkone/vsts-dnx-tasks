@@ -22,6 +22,12 @@ foreach($key in $PSBoundParameters.Keys)
 
 Function Main
 {
+    if([string]::IsNullOrWhiteSpace($env:SYSTEM_ACCESSTOKEN))
+    {
+        Write-Error "OAuth token is empty! please check if ""Allow Scripts to Access OAuth Token"" is enabled under ""Options"" in the build definition."
+        Exit 1
+    }
+
     [Boolean]$isCreateMdFile = [System.Convert]::ToBoolean($CreateMdFile)
     [Boolean]$isIncludeLinks = [System.Convert]::ToBoolean($IncludeLinks)
     [Boolean]$isAppendMdFile = [System.Convert]::ToBoolean($AppendMdFile)
