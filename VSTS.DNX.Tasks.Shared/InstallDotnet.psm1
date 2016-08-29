@@ -13,6 +13,7 @@
         Write-Output "Dotnet found:"
         Write-Output "    $($dotnet.Path)"
         $dotnetPath = $dotnet.Path
+        Write-Output "    Skipping installation."
     }
     else
     {
@@ -29,13 +30,14 @@
         $webClient = New-Object System.Net.WebClient
         $webClient.Proxy = [System.Net.WebRequest]::DefaultWebProxy
         $webClient.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
-        Write-Output "Downloading dotnet-install.ps1 to $dotnetPs1Path"
+        Write-Output "    Downloading dotnet-install.ps1 to $dotnetPs1Path"
         $webClient.DownloadFile("https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.ps1", $dotnetPs1Path)
 
         $dotnetPath = $dotnetPs1Path
 
-        Write-Output "Calling: $dotnetPath"
+        Write-Output "    Calling: $dotnetPath"
         & "$dotnetPath"
+        Write-Output "    Done."
     }
 
     Write-Verbose "Leaving Method Install-Dotnet"

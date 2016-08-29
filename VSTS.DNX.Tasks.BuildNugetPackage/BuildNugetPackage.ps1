@@ -50,7 +50,7 @@ Function Main
         $versionSuffix = "--version-suffix $prefix$($VersionData[0])"
     }
 
-    if($isSkipDotNetInstall)
+    if(-Not $isSkipDotNetInstall)
     {
         Import-Module "$(Split-Path -parent $PSCommandPath)\InstallDotnet.psm1"
 
@@ -80,10 +80,12 @@ Function Main
 
     $projectList = $projects | % {"""$SourceFolder$($_.Trim('"'))""" } | & {"$input"}
     Invoke-Expression "& dotnet restore $projectList"
+    Write-Output "   Restore done."
 
     Write-Output "dotnet build for:"
     Write-Output $($projectList -split(" ") | % { "    $_" })
     Invoke-Expression "& dotnet build $projectList -c $BuildConfiguration"
+    Write-Output "   Build done."
 
     foreach($project in $projects)
     {
@@ -91,6 +93,7 @@ Function Main
         Write-Output "dotnet pack for:"
         Write-Output "    $p"
         Invoke-Expression "& dotnet pack $p -c $BuildConfiguration -o ""$OutputFolder"" $versionSuffix"
+        Write-Output "    Pack done for: $p"
     }
 }
 
