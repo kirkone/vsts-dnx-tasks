@@ -98,6 +98,10 @@ Please have a look here: [GitHub Issues](https://github.com/kirkone/vsts-dnx-tas
 
 ### Release Notes
 
+#### Version 0.1.10
+
+- Fix for "Skip DotNet CLI Install" handled wrong
+
 #### Version 0.1.9
 
 - Added Warning for not having access to the OAuth token when needed
