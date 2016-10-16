@@ -7,6 +7,8 @@ This extension includes the following tasks:
 - DNX Tasks Publish Web Package
 - DNX Tasks Build Nuget Package
 - DNX Tasks Azure SlotSwap
+- DNX Tasks Clear NuGet Cache
+- DNX Tasks Generate Change Log
 
 ### DNX Tasks Build Web
 
@@ -21,11 +23,12 @@ All the results of the build process will put in the folder specified in "**Outp
 Under the "**Advanced**" group you can decide if you want the source code to be included in the build output with the "**Publish Source**" switch.
 Also the "**Working Folder**" can be specified here. Usual this should be the folder where your .sln file is.  
 The field "**Source Folder**" is used to specify a subfolder where your projects are located. The default value is "src" like in a standard asp.net core project. If your project folders are direct in your "**Working Folder**" leave this field blank.  
-Please enter a relative path to the "**Working Folder**".
 
 The Task will look in "**Working folder**/**Source Folder**/**Project Name**" for a project.json and starts building this project.  
 
-This task will fail when no project can be found in the specified location.
+This task will fail when no project can be found in the specified location.  
+
+If there is no need to install the "**dotnet cli**" please check the "**Skip DotNet CLI Install**" checkbox.  
 
 > All your npm, grunt, bower and so on tasks should be before this task to make sure all the generated content is included in the output.
 
@@ -50,6 +53,8 @@ This task is used to create Nuget packages for one or multiple projects. For the
 
 Within the "**Advanced**" section there is a checkbox for "**Pre Release**". If this is true, the nuget package will build as prerelease with "**VERSIONNUMBER-pre-BUILDNUMBER**" in name.  
 
+If there is no need to install the "**dotnet cli**" please check the "**Skip DotNet CLI Install**" checkbox.  
+
 > The "**BUILDNUMBER**" part is taken from the "*Build number format*" under the "*Global*" tab in your build definition settings. This task takes the last number from this string.  
 > I recommend to set the "*Build number format*" to somthing like this:  
 > "**$(BuildDefinitionName)_$(BuildConfiguration)_$(Year:yy)$(DayOfYear)$(Rev:rr)**"
@@ -64,11 +69,63 @@ In "**Azure Classic Subscription**" select the subscription your Website is assi
 The Name of the Azure Website have to be in "**Web App Name**".  
 Specify the slots you want to swap in the "**From**" and "**To**" fields.
 
+### DNX Tasks Clear NuGet Cache
+
+For some reasons it can be necessary to clean up the NuGet cache folder.  
+This task will try to detect the location of the folder by it self.  
+The Folder can be overwritten by using the "**NuGet Cache Path**" field.  
+
+> #### Caution: 
+> Use this only when you exactly know what you are doing!  
+> This will clear the package cache and if there are any other build processes running at the same time at the same mashine **very bad things** will happen!
+
+### DNX Tasks Generate Change Log
+
+To get a Change Log file with all commits for the actual build use this task.  
+The "**Output File**" field specifies the name and the location where the file will be written.  
+To get a Markdown file check the "**Create MarkDown File**" field.  
+When "**Links to Commits**" is checked the Markdown file includes links to every commit mentioned in the change log.  
+To get the new content appended to an existing file check "**Append To .md File**".  
+Use "**Create JSON File**" to get the information about the commits as a .json file. The .json file will use the same value from the "**Output File**" field apart from the file ending .json
+
+To get this task working script access for the OAuth token has to be enabled. To do so, go to the **Options** tab of the build definition and select **Allow Scripts to Access OAuth Token**.
+
+> This task only writes a file. You have to take care of it by your self. For example add it to your build output.
+
 ### Questions, Recommendations, Issues?
 
 Please have a look here: [GitHub Issues](https://github.com/kirkone/vsts-dnx-tasks/issues)  
 
 ### Release Notes
+
+#### Version 0.1.10
+
+- Fix for "Skip DotNet CLI Install" handled wrong
+
+#### Version 0.1.9
+
+- Added Warning for not having access to the OAuth token when needed
+
+#### Version 0.1.8
+
+- Fixed error with authorization.
+
+#### Version 0.1.7
+
+- Added Task to generate a Change Log file.
+
+#### Version 0.1.6
+
+- Added Task to clear the Nuget package cache on the Build Server.
+
+#### Version 0.1.5
+
+- Fixed error with empty paths for the "**Source Folder**" parrameters  
+- Added logic to detect absolute paths to prevent leading ".\" for absolute paths  
+
+#### Version 0.1.4
+
+- Added option to skip installation of the dotnet cli in the BuildNuGetPackage and BuildWebPackage task
 
 #### Version 0.1.1
 

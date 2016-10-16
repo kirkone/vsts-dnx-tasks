@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "VSTS.DNX.Tasks.SlotSwap", "VSTS.DNX.Tasks.SlotSwap\VSTS.DNX.Tasks.SlotSwap.pssproj", "{F07AB8E3-C119-4F83-867F-2F4318965E7B}"
 EndProject
@@ -40,6 +40,10 @@ Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "VSTS.DNX.Tasks.PublishWebPa
 EndProject
 Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "VSTS.DNX.Tasks.BuildNugetPackage", "VSTS.DNX.Tasks.BuildNugetPackage\VSTS.DNX.Tasks.BuildNugetPackage.pssproj", "{BB41D33B-9A93-481B-9CD5-574BE732F5A8}"
 EndProject
+Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "VSTS.DNX.Tasks.ClearNugetCache", "VSTS.DNX.Tasks.ClearNugetCache\VSTS.DNX.Tasks.ClearNugetCache.pssproj", "{072E9C51-A318-45EF-A429-D846FF0E5B49}"
+EndProject
+Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "VSTS.DNX.Tasks.GenerateChangeLog", "VSTS.DNX.Tasks.GenerateChangeLog\VSTS.DNX.Tasks.GenerateChangeLog.pssproj", "{33FC1AE3-9682-45ED-B3EA-EBD639175F72}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,6 +70,14 @@ Global
 		{BB41D33B-9A93-481B-9CD5-574BE732F5A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB41D33B-9A93-481B-9CD5-574BE732F5A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB41D33B-9A93-481B-9CD5-574BE732F5A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{072E9C51-A318-45EF-A429-D846FF0E5B49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{072E9C51-A318-45EF-A429-D846FF0E5B49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{072E9C51-A318-45EF-A429-D846FF0E5B49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{072E9C51-A318-45EF-A429-D846FF0E5B49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33FC1AE3-9682-45ED-B3EA-EBD639175F72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33FC1AE3-9682-45ED-B3EA-EBD639175F72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33FC1AE3-9682-45ED-B3EA-EBD639175F72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33FC1AE3-9682-45ED-B3EA-EBD639175F72}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

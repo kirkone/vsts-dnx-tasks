@@ -1,7 +1,7 @@
 ﻿function Get-TrimedPath
 {
     param (
-    [String] [Parameter(Mandatory = $true)]
+    [String] [Parameter(Mandatory = $false)]
     $Path = ""
 )
 
@@ -10,7 +10,14 @@
     $Path = $Path.Trim().Trim("""").Trim().Replace("/","\\").Trim("\")
     if($Path -ne "")
     {
-        $Path = ".\" + $Path + "\"
+        if(-not [System.IO.Path]::IsPathRooted($Path))
+        {
+            $Path = ".\" + $Path + "\"
+        }
+        else
+        {
+            $Path = $Path + "\"
+        }
     }
     else
     {

@@ -11,7 +11,9 @@ param (
     [String] [Parameter(Mandatory = $false)]
     $WorkingFolder = "",
     [String] [Parameter(Mandatory = $false)]
-    $SourceFolder = ""
+    $SourceFolder = "",
+    [string] [Parameter(Mandatory = $true)]
+    $SkipDotNetInstall
 )
 
 Write-Verbose "Entering script BuildWebPackage.ps1"
@@ -33,11 +35,16 @@ Function Main
 
     $SourceFolder = Get-TrimedPath $SourceFolder
 
+    $isSkipDotNetInstall = [System.Convert]::ToBoolean($SkipDotNetInstall)
+
     $OutputFolder = $OutputFolder.Trim('"')
 
-    Import-Module "$(Split-Path -parent $PSCommandPath)\InstallDotnet.psm1"
+    if(-Not $isSkipDotNetInstall)
+    {
+        Import-Module "$(Split-Path -parent $PSCommandPath)\InstallDotnet.psm1"
 
-    Install-Dotnet
+        Install-Dotnet
+    }
 
     $projects = $ProjectName.Trim() -split(" ");
 
@@ -62,10 +69,12 @@ Function Main
 
     $projectList = $projects | % {"""$SourceFolder$($_.Trim('"'))""" } | & {"$input"}
     Invoke-Expression "& dotnet restore $projectList"
+    Write-Output "   Restore done."
 
     Write-Output "dotnet build for:"
     Write-Output $($projectList -split(" ") | % { "    $_" })
     Invoke-Expression "& dotnet build $projectList -c $BuildConfiguration"
+    Write-Output "   Build done."
 
     foreach($project in $projects)
     {
@@ -74,6 +83,7 @@ Function Main
         Write-Output "dotnet publish for:"
         Write-Output "    $p"
         Invoke-Expression "& dotnet publish $p -c $BuildConfiguration -o ""$OutputFolder\$outDir"" --no-build"
+        Write-Output "    Publish done for: $p"
     }
 }
 
