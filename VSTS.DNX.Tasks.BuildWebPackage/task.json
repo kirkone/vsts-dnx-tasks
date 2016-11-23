@@ -3,19 +3,19 @@
     "name": "DNX.Tasks.BuildWebPackage",
     "friendlyName": "DNX Tasks Build Web Package",
     "description": "Build a package with dotnet cli for Deployment",
-    "helpMarkDown": "Version: 0.1.10",
+    "helpMarkDown": "Version: 0.1.11",
     "category": "Build",
     "author": "Kirsten Kluge",
     "version": {
         "Major": 0,
         "Minor": 1,
-        "Patch": 10
+        "Patch": 11
     },
     "visibility": [
         "Build"
     ],
     "demands": [ ],
-    "minimumAgentVersion": "1.99.0",
+    "minimumAgentVersion": "1.99.5",
     "groups": [
         {
             "name": "advanced",
