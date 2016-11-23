@@ -28,3 +28,9 @@
 
     return $Path
 }
+
+function Format-Console {
+    [CmdletBinding()]
+    param([Parameter(ValueFromPipeline=$True)][string[]]$inputObject)
+    PROCESS { Write-Host "    $inputObject" }
+}
