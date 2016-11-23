@@ -98,6 +98,12 @@ Please have a look here: [GitHub Issues](https://github.com/kirkone/vsts-dnx-tas
 
 ### Release Notes
 
+#### Version 0.1.11
+
+- Better handling for warnings in Build Web task
+- Warnings will not fail the task anymore
+- cleaner format for the task output  
+
 #### Version 0.1.10
 
 - Fix for "Skip DotNet CLI Install" handled wrong
