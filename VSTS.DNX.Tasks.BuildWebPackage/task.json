@@ -3,13 +3,13 @@
     "name": "DNX.Tasks.BuildWebPackage",
     "friendlyName": "DNX Tasks Build Web Package",
     "description": "Build a package with dotnet cli for Deployment",
-    "helpMarkDown": "Version: 0.1.11",
+    "helpMarkDown": "Version: 0.1.12",
     "category": "Build",
     "author": "Kirsten Kluge",
     "version": {
         "Major": 0,
         "Minor": 1,
-        "Patch": 11
+        "Patch": 12
     },
     "visibility": [
         "Build"
@@ -86,7 +86,7 @@
             "name": "SkipDotNetInstall",
             "type": "boolean",
             "label": "Skip DotNet CLI Install",
-            "defaultValue": "false",
+            "defaultValue": "true",
             "required": true,
             "helpMarkDown": "Check this If you do not want to install dotnet cli or dotnet cli is already present.",
             "groupName": "advanced"

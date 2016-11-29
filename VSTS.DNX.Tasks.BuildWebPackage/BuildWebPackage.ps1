@@ -68,9 +68,9 @@ Function Main
 
     $projectList = $projects | % {"""$SourceFolder$($_.Trim('"'))""" } | & {"$input"}
     Write-Host "dotnet restore for:"
-    Write-Host $($projectList -split(" ") | % { "$_" })
+    Write-Host "    $($projectList -split(" ") | % { "$_" })`n`r "
 
-    Invoke-Expression "& dotnet restore $projectList | Format-Console" 2>1
+    Invoke-Expression "& dotnet restore $projectList | Format-Console" 2>&1
 
     if ($LASTEXITCODE -ne 0) {
         Write-Host "   Restore failed.`n`r "
@@ -80,8 +80,8 @@ Function Main
     Write-Host "    Restore done.`n`r "
 
     Write-Host "dotnet build for:"
-    Write-Host $($projectList -split(" ") | % { "$_" })
-    . { & dotnet build $projectList -c $BuildConfiguration --no-incremental 2>&1 } | Format-Console
+    Write-Host "    $($projectList -split(" ") | % { "$_" })`n`r "
+    Invoke-Expression "& dotnet build $projectList -c $BuildConfiguration --no-incremental | Format-Console" 2>&1
 
     if ($LASTEXITCODE -ne 0)
     {
@@ -97,9 +97,9 @@ Function Main
         $p = "$SourceFolder$($project.Trim('"'))"
         $outDir = (Get-Item $p).Name
         Write-Host "dotnet publish for:"
-        Write-Host """$p"""
-        . { & dotnet publish $p -c $BuildConfiguration -o "$OutputFolder\$outDir" --no-build 2>&1 } | Format-Console
-        Write-Host " `n`r    Publish done for: $p"
+        Write-Host "    ""$p""`n`r "
+        Invoke-Expression "& dotnet publish $p -c $BuildConfiguration -o ""$OutputFolder\$outDir"" --no-build | Format-Console" 2>&1
+        Write-Host " `n`r    Publish done for: $p`n`r "
     }
 }
 

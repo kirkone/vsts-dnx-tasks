@@ -98,6 +98,10 @@ Please have a look here: [GitHub Issues](https://github.com/kirkone/vsts-dnx-tas
 
 ### Release Notes
 
+#### Version 0.1.12
+
+- Fixed bug in Build Web task that failed when the task had to build more than one project  
+
 #### Version 0.1.11
 
 - Better handling for warnings in Build Web task
