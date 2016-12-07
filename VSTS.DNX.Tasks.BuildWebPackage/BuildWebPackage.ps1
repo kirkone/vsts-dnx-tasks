@@ -81,12 +81,26 @@ Function Main
 
     Write-Host "dotnet build for:"
     Write-Host "    $($projectList -split(" ") | % { "$_" })`n`r "
-    Invoke-Expression "& dotnet build $projectList -c $BuildConfiguration --no-incremental | Format-Console" 2>&1
+    Invoke-Expression "& dotnet build $projectList -c $BuildConfiguration --no-incremental 2>`&1" -ErrorVariable buildErrors | Format-Console
 
     if ($LASTEXITCODE -ne 0)
     {
         Write-Host "    Build Failed!`n`r "
+        if($buildErrors.Length -gt 1)
+        {
+            $buildErrors.RemoveAt(0)
+        }
+        $buildErrors.ForEach({
+            if ($_ -is [System.Management.Automation.ErrorRecord] -and
+                -not [string]::IsNullOrWhiteSpace($_) -and
+                -not ($_ -like "*dotnet-compile.rsp returned Exit Code 1*"))
+            {
+                Write-Host "##vso[task.logissue type=error;]Error: " $_
+            }
+        })
         Write-Host "##vso[task.complete result=Failed;]Build Failed!"
+        Write-Host " "
+
         exit 1
     }
 
