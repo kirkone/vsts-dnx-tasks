@@ -14,7 +14,7 @@
     $Destination,
     [String] [Parameter(Mandatory = $true)]
     $UseAppOffline,
-    [String] [Parameter(Mandatory = $true)]
+    [String] [Parameter(Mandatory = $false)]
     $AppOfflineFile,
     [String] [Parameter(Mandatory = $true)]
     $StopBeforeDeploy,
@@ -79,9 +79,8 @@ Function Main
     $apiUserAgent = "powershell/1.0"
 
     $commandApiUri = JoinParts ($baseUri, "/api/command")
-    $vsfApiUri = JoinParts ($baseUri, "/api/vsf", $Destination) '/'
-    $deployApiUri = JoinParts ($baseUri, "api/zip/", $Destination) '/'
-
+    $vfsApiUri = JoinParts ($baseUri, "/api/vfs", $Destination)
+    $deployApiUri = JoinParts ($baseUri, "api/zip/", $Destination)
 
     $publishZip = $Source
     if(Test-Path $Source -pathtype container)
@@ -106,7 +105,7 @@ Function Main
             Write-Host "    No App_Offline.htm specified, using default"
             $AppOfflineFile = "$(Split-Path -parent $PSCommandPath)\app_offline.htm"
         }
-        Invoke-RestMethod -Uri "$($vsfApiUri)app_offline.htm" -Headers $authHeader -UserAgent $userAgent -Method PUT -InFile $AppOfflineFile -ContentType "multipart/form-data" -TimeoutSec $timeout | Out-Null
+        Invoke-RestMethod -Uri "$vfsApiUri/app_offline.htm" -Headers $authHeader -UserAgent $userAgent -Method PUT -InFile $AppOfflineFile -ContentType "multipart/form-data" -TimeoutSec $timeout | Out-Null
         Write-Host "    Done."
     }
 
@@ -129,9 +128,8 @@ Function Main
         Write-Host "    Done."
     }
 
-    $deployApiUri = JoinParts ($baseUri, "api/zip/", $Destination) '/'
     Write-Host ("Publishing to URI '{0}'..." -f $deployApiUri)
-    Invoke-RestMethod -Uri $deployApiUri -Headers $authHeader -UserAgent $userAgent -Method PUT -InFile $publishZip -ContentType "multipart/form-data" -TimeoutSec $timeout | Out-Null
+    Invoke-RestMethod -Uri "$deployApiUri/" -Headers $authHeader -UserAgent $userAgent -Method PUT -InFile $publishZip -ContentType "multipart/form-data" -TimeoutSec $timeout | Out-Null
 
     Write-Host "    Finished publishing of $WebSiteName"
 
@@ -144,7 +142,7 @@ Function Main
 
     if($isUseAppOffline){
         Write-Host "Removing app_offline.htm"
-        Invoke-RestMethod -Uri "$($vsfApiUri)app_offline.htm" -Headers $authHeader -UserAgent $userAgent -Method DELETE -TimeoutSec $timeout | Out-Null
+        Invoke-RestMethod -Uri "$vfsApiUri/app_offline.htm" -Headers $authHeader -UserAgent $userAgent -Method DELETE -TimeoutSec $timeout | Out-Null
         Write-Host "    Done."
 
     }
