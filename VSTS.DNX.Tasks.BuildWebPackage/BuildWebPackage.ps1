@@ -64,13 +64,13 @@ Function Main
         exit 1
     }
 
-    Write-Host "$($projects.Count) Projects to build`n`r "
+    Write-Host "    $($projects.Count) Projects to build`n`r "
 
     $projectList = $projects | % {"""$SourceFolder$($_.Trim('"'))""" } | & {"$input"}
     Write-Host "dotnet restore for:"
     Write-Host "    $($projectList -split(" ") | % { "$_" })`n`r "
 
-    Invoke-Expression "& dotnet restore $projectList | Format-Console" 2>&1
+    Invoke-Expression "& dotnet restore $projectList" 2>&1 | Format-Console
 
     if ($LASTEXITCODE -ne 0) {
         Write-Host "   Restore failed.`n`r "
@@ -81,24 +81,35 @@ Function Main
 
     Write-Host "dotnet build for:"
     Write-Host "    $($projectList -split(" ") | % { "$_" })`n`r "
-    Invoke-Expression "& dotnet build $projectList -c $BuildConfiguration --no-incremental 2>`&1" -ErrorVariable buildErrors | Format-Console
+    Invoke-Expression "& dotnet build $projectList -c $BuildConfiguration --no-incremental" 2>&1 -ErrorVariable buildIssues | Format-Console
 
-    if ($LASTEXITCODE -ne 0)
+    $buildWarnings = $buildIssues|where{$_ -like "*: warning *"}
+    $buildErrors = $buildIssues|where{$_ -like "*: error *"}
+
+    if ($buildWarnings.Count -gt 0)
     {
-        Write-Host "    Build Failed!`n`r "
-        if($buildErrors.Length -gt 1)
-        {
-            $buildErrors.RemoveAt(0)
-        }
+        Write-Host "    Warnings:`n`r "
+        $buildWarnings.ForEach({
+            if ($_ -ne [string]::IsNullOrWhiteSpace($_))
+            {
+                Write-Host "##vso[task.logissue type=waring;]Warning: $_"
+            }
+        })
+        Write-Host " `n`r "
+    }
+
+    if ($buildErrors.Count -gt 0)
+    {
+        Write-Host "    Errors:`n`r "
         $buildErrors.ForEach({
-            if ($_ -is [System.Management.Automation.ErrorRecord] -and
-                -not [string]::IsNullOrWhiteSpace($_) -and
+            if ($_ -ne [string]::IsNullOrWhiteSpace($_) -and
                 -not ($_ -like "*dotnet-compile.rsp returned Exit Code 1*"))
             {
-                Write-Host "##vso[task.logissue type=error;]Error: " $_
+                Write-Host "##vso[task.logissue type=error;]Error: $_"
             }
         })
         Write-Host "##vso[task.complete result=Failed;]Build Failed!"
+        Write-Host "    Build Failed!`n`r "
         Write-Host " "
 
         exit 1
@@ -112,7 +123,38 @@ Function Main
         $outDir = (Get-Item $p).Name
         Write-Host "dotnet publish for:"
         Write-Host "    ""$p""`n`r "
-        Invoke-Expression "& dotnet publish $p -c $BuildConfiguration -o ""$OutputFolder\$outDir"" --no-build | Format-Console" 2>&1
+        Invoke-Expression "& dotnet publish $p -c $BuildConfiguration -o ""$OutputFolder\$outDir"" --no-build " 2>&1 -ErrorVariable publishIssues | Format-Console
+
+        $publishWarnings = $publishIssues|where{$_ -like "*: warning *"}
+        $publishErrors = $publishIssues|where{$_ -like "*: error *"}
+
+        if ($publishWarnings.Count -gt 0)
+        {
+            Write-Host "    Warnings:`n`r "
+            $publishWarnings.ForEach({
+                if ($_ -ne [string]::IsNullOrWhiteSpace($_))
+                {
+                    Write-Host "##vso[task.logissue type=warning;]Warning: $_"
+                }
+            })
+            Write-Host " `n`r "
+        }
+
+        if ($publishErrors.Count -gt 0)
+        {
+            Write-Host "    Errors:`n`r "
+            $publishErrors.ForEach({
+                if ($_ -ne [string]::IsNullOrWhiteSpace($_))
+                {
+                    Write-Host "##vso[task.logissue type=error;]Error: $_"
+                }
+            })
+            Write-Host "##vso[task.complete result=Failed;]Publish Failed!"
+            Write-Host "    Publish Failed!`n`r "
+            Write-Host " "
+
+            exit 1
+        }
         Write-Host " `n`r    Publish done for: $p`n`r "
     }
 }
