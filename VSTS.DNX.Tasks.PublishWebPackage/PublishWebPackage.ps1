@@ -14,6 +14,8 @@
     $Destination,
     [String] [Parameter(Mandatory = $true)]
     $UseAppOffline,
+    [String] [Parameter(Mandatory = $true)]
+    $UseCustomAppOfflineFile,
     [String] [Parameter(Mandatory = $false)]
     $AppOfflineFile,
     [String] [Parameter(Mandatory = $true)]
@@ -54,6 +56,7 @@ Function Main
     }
 
     $isUseAppOffline = [System.Convert]::ToBoolean($UseAppOffline)
+    $isUseCustomAppOfflineFile = [System.Convert]::ToBoolean($UseCustomAppOfflineFile)
     $isStopBeforeDeploy = [System.Convert]::ToBoolean($StopBeforeDeploy)
     $isCleanBeforeDeploy = [System.Convert]::ToBoolean($CleanBeforeDeploy)
     $isForceRestart = [System.Convert]::ToBoolean($ForceRestart)
@@ -83,7 +86,7 @@ Function Main
     $deployApiUri = JoinParts ($baseUri, "api/zip/", $Destination)
 
     $publishZip = $Source
-    if(Test-Path $Source -pathtype container)
+    if(Test-Path $Source -pathtype Container)
     {
         Write-Host "Source is no .zip file, create .zip..."
         $publishZip = [System.IO.Path]::Combine($env:TMP, ([System.IO.Path]::GetRandomFileName()))
@@ -100,10 +103,17 @@ Function Main
 
     if($isUseAppOffline){
         Write-Host "Placing app_offline.htm"
-        if([string]::IsNullOrWhiteSpace($AppOfflineFile))
+        if(-not $isUseCustomAppOfflineFile)
         {
             Write-Host "    No App_Offline.htm specified, using default"
-            $AppOfflineFile = "$(Split-Path -parent $PSCommandPath)\app_offline.htm"
+            $AppOfflineFile = "$(Split-Path -parent $PSCommandPath)`\app_offline.htm"
+        }
+        if(Test-Path $AppOfflineFile -pathtype Container)
+        {
+            Write-Error "Invalid value for app_offline.htm`n`r "
+            Write-Error $AppOfflineFile
+            Write-Host "##vso[task.complete result=Failed;]Invalid value for app_offline.htm!"
+            exit 1
         }
         Invoke-RestMethod -Uri "$vfsApiUri/app_offline.htm" -Headers $authHeader -UserAgent $userAgent -Method PUT -InFile $AppOfflineFile -ContentType "multipart/form-data" -TimeoutSec $timeout | Out-Null
         Write-Host "    Done."

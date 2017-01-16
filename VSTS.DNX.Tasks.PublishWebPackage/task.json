@@ -3,13 +3,13 @@
     "name": "DNX.Tasks.PublishWebPackage",
     "friendlyName": "DNX Tasks Azure PublishWebPackage",
     "description": "Publish a Dotnet package to Azure Website",
-    "helpMarkDown": "Version: 0.1.18",
+    "helpMarkDown": "Version: 0.1.20",
     "category": "Deploy",
     "author": "Kirsten Kluge",
     "version": {
         "Major": 0,
         "Minor": 1,
-        "Patch": 17
+        "Patch": 20
     },
     "visibility": [
         "Build",
@@ -99,6 +99,16 @@
             "groupName": "advanced"
         },
         {
+            "name": "UseCustomAppOfflineFile",
+            "type": "boolean",
+            "label": "Custom App_Offline.htm",
+            "defaultValue": "false",
+            "required": true,
+            "helpMarkDown": "Use an custom source for the App_Offline.htm.",
+            "groupName": "advanced",
+            "visibleRule": "UseAppOffline = true"
+        },
+        {
             "name": "AppOfflineFile",
             "label": "Source File for App_Offline.htm",
             "type": "filePath",
@@ -106,7 +116,7 @@
             "helpMarkdown": "The content of this file is placed as App_Offline.htm while deployment.  <br>Leave this field blank to use the default App_Offline.htm",
             "required": false,
             "groupName": "advanced",
-            "visibleRule": "UseAppOffline = true"
+            "visibleRule": "UseCustomAppOfflineFile = true"
         },
         {
             "name": "StopBeforeDeploy",

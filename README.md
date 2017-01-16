@@ -100,6 +100,10 @@ Please have a look here: [GitHub Issues](https://github.com/kirkone/vsts-dnx-tas
 
 ### Release Notes
 
+#### Version 0.1.20
+
+- Fix for Publish Web not working in Release Management  
+
 #### Version 0.1.18
 
 - added support for App_Offline.htm in Web Publish Task  
