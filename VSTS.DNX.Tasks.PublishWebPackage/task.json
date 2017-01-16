@@ -98,7 +98,15 @@
             "helpMarkDown": "Place an App_Offline.htm before deployment to shut down application while deployment.",
             "groupName": "advanced"
         },
-
+        {
+            "name": "AppOfflineFile",
+            "label": "Sourde File for App_Offline.htm",
+            "type": "filePath",
+            "defaultValue": "",
+            "helpMarkdown": "The content of this file is placed as App_Offline.htm while deployment.  <br>Leave this field blank to use the default App_Offline.htm",
+            "required": false,
+            "visibleRule": "UseAppOffline = true"
+        },
         {
             "name": "StopBeforeDeploy",
             "type": "boolean",
@@ -116,8 +124,7 @@
             "defaultValue": "false",
             "required": true,
             "helpMarkDown": "The destination folder will be cleaned before the deployment.<br>Warning:<br>All files and folders will be deleted within the destination folder.",
-            "groupName": "advanced",
-            "visibleRule": "UseAppOffline = false"
+            "groupName": "advanced"
         },
         {
             "name": "ForceRestart",

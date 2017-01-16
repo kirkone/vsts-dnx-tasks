@@ -13,6 +13,10 @@
     [String] [Parameter(Mandatory = $true)]
     $Destination,
     [String] [Parameter(Mandatory = $true)]
+    $UseAppOffline,
+    [String] [Parameter(Mandatory = $true)]
+    $AppOfflineFile,
+    [String] [Parameter(Mandatory = $true)]
     $StopBeforeDeploy,
     [String] [Parameter(Mandatory = $true)]
     $CleanBeforeDeploy,
@@ -22,10 +26,10 @@
 
 Write-Verbose "Entering script PublishWebPackage.ps1"
 
-Write-Output "Parameter Values:"
+Write-Host "Parameter Values:"
 foreach($key in $PSBoundParameters.Keys)
 {
-    Write-Output ("    $key = $($PSBoundParameters[$key])")
+    Write-Host ("    $key = $($PSBoundParameters[$key])")
 }
 
 Function JoinParts {
@@ -37,7 +41,7 @@ Function JoinParts {
 
 Function Main
 {
-    Write-Output "Starting publish of $WebSiteName $SlotName"
+    Write-Host "Starting publish of $WebSiteName $SlotName"
     [int]$timeout = 600
 
     $webIdentifier = if ([string]::IsNullOrWhiteSpace($SlotName))
@@ -49,6 +53,7 @@ Function Main
         @{Name = $WebSiteName; Slot = $SlotName}
     }
 
+    $isUseAppOffline = [System.Convert]::ToBoolean($UseAppOffline)
     $isStopBeforeDeploy = [System.Convert]::ToBoolean($StopBeforeDeploy)
     $isCleanBeforeDeploy = [System.Convert]::ToBoolean($CleanBeforeDeploy)
     $isForceRestart = [System.Convert]::ToBoolean($ForceRestart)
@@ -60,21 +65,28 @@ Function Main
     # Website not found -> cancel task with error!
     if(!$website)
     {
-        Write-Error "Website not found! aborting..."
-        return
+        Write-Error "Website not found! aborting...`n`r "
+        Write-Host "##vso[task.complete result=Failed;]Website not found!"
+        exit 1
     }
 
     $username = $website.PublishingUsername
     $password = $website.PublishingPassword
     $base64Auth = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f $username, $password)))
-    $authHeader = @{Authorization=("Basic {0}" -f $base64Auth)}
+    $authHeader = @{Authorization=("Basic {0}" -f $base64Auth);"If-Match"="*"}
 
     $baseUri = ($website.SiteProperties.Properties | Where-Object { $_.Name -eq "RepositoryUri" } | Select-Object -First 1).Value
+    $apiUserAgent = "powershell/1.0"
+
+    $commandApiUri = JoinParts ($baseUri, "/api/command")
+    $vsfApiUri = JoinParts ($baseUri, "/api/vsf", $Destination) '/'
+    $deployApiUri = JoinParts ($baseUri, "api/zip/", $Destination) '/'
+
 
     $publishZip = $Source
     if(Test-Path $Source -pathtype container)
     {
-        Write-Output "Source is no .zip file, create .zip..."
+        Write-Host "Source is no .zip file, create .zip..."
         $publishZip = [System.IO.Path]::Combine($env:TMP, ([System.IO.Path]::GetRandomFileName()))
 
         if (Test-Path $publishZip)
@@ -84,42 +96,57 @@ Function Main
 
         Add-Type -Assembly "System.IO.Compression.FileSystem"
         [System.IO.Compression.ZipFile]::CreateFromDirectory("$Source", "$publishZip")
-        Write-Output "    Done."
+        Write-Host "    Done."
     }
 
-    if($isStopBeforeDeploy)
+    if($isUseAppOffline){
+        Write-Host "Placing app_offline.htm"
+        if([string]::IsNullOrWhiteSpace($AppOfflineFile))
+        {
+            Write-Host "    No App_Offline.htm specified, using default"
+            $AppOfflineFile = "$(Split-Path -parent $PSCommandPath)\app_offline.htm"
+        }
+        Invoke-RestMethod -Uri "$($vsfApiUri)app_offline.htm" -Headers $authHeader -UserAgent $userAgent -Method PUT -InFile $AppOfflineFile -ContentType "multipart/form-data" -TimeoutSec $timeout | Out-Null
+        Write-Host "    Done."
+    }
+
+    if($isStopBeforeDeploy -and -not $isUseAppOffline)
     {
-        Write-Output "Stop $WebSiteName $SlotName"
+        Write-Host "Stop $WebSiteName $SlotName"
         Stop-AzureWebsite @webIdentifier
-        Write-Output "    Done."
+        Write-Host "    Done."
     }
 
     if($isCleanBeforeDeploy)
     {
-        $commandApiUri = JoinParts ($baseUri, "/api/command")
-
-        #TODO: Use Powershell: Remove-Item -recurse .\* -exclude app_offline.htm
         $commandBody = @{
-            command = "del /f /s /q .\ > nul & for /d %i in (*) do rmdir /s /q `"%i`""
+            command = "powershell Remove-Item -recurse .\* -exclude app_offline.htm"
             dir = $Destination.Replace("/","\\")
         }
 
-        Write-Output "Cleaning folder `"$Destination`"..."
-        Invoke-RestMethod -Uri $commandApiUri -Headers $authHeader -Method POST -ContentType "application/json" -Body (ConvertTo-Json $commandBody) -TimeoutSec $timeout | Out-Null
-        Write-Output "    Done."
+        Write-Host "Cleaning folder `"$Destination`"..."
+        Invoke-RestMethod -Uri $commandApiUri -Headers $authHeader -UserAgent $userAgent -Method POST -ContentType "application/json" -Body (ConvertTo-Json $commandBody) -TimeoutSec $timeout | Out-Null
+        Write-Host "    Done."
     }
 
     $deployApiUri = JoinParts ($baseUri, "api/zip/", $Destination) '/'
-    Write-Output ("Publishing to URI '{0}'..." -f $deployApiUri)
-    Invoke-RestMethod -Uri $deployApiUri -Headers $authHeader -Method PUT -InFile $publishZip -ContentType "multipart/form-data" -TimeoutSec $timeout | Out-Null
+    Write-Host ("Publishing to URI '{0}'..." -f $deployApiUri)
+    Invoke-RestMethod -Uri $deployApiUri -Headers $authHeader -UserAgent $userAgent -Method PUT -InFile $publishZip -ContentType "multipart/form-data" -TimeoutSec $timeout | Out-Null
 
-    Write-Output "    Finished publishing of $WebSiteName"
+    Write-Host "    Finished publishing of $WebSiteName"
 
-    if($isForceRestart)
+    if($isForceRestart -and -not $isUseAppOffline)
     {
-        Write-Output "Restart $WebSiteName $SlotName"
+        Write-Host "Restart $WebSiteName $SlotName"
         Restart-AzureWebsite @webIdentifier
-        Write-Output "    Done."
+        Write-Host "    Done."
+    }
+
+    if($isUseAppOffline){
+        Write-Host "Removing app_offline.htm"
+        Invoke-RestMethod -Uri "$($vsfApiUri)app_offline.htm" -Headers $authHeader -UserAgent $userAgent -Method DELETE -TimeoutSec $timeout | Out-Null
+        Write-Host "    Done."
+
     }
 }
 

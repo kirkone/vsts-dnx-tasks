@@ -97,6 +97,9 @@
             "path": "VSTS.DNX.Tasks.PublishWebPackage/PublishWebPackage.ps1"
         },
         {
+            "path": "VSTS.DNX.Tasks.PublishWebPackage/app_offline.htm"
+        },
+        {
             "path": "VSTS.DNX.Tasks.PublishWebPackage/task.json"
         },
         {
