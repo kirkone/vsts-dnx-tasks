@@ -97,6 +97,8 @@ Function Main
     if($isCleanBeforeDeploy)
     {
         $commandApiUri = JoinParts ($baseUri, "/api/command")
+
+        #TODO: Use Powershell: Remove-Item -recurse .\* -exclude app_offline.htm
         $commandBody = @{
             command = "del /f /s /q .\ > nul & for /d %i in (*) do rmdir /s /q `"%i`""
             dir = $Destination.Replace("/","\\")

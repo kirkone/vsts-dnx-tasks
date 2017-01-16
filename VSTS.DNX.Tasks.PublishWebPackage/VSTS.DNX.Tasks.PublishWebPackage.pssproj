@@ -35,6 +35,7 @@
     <Content Include="task.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="app_offline.htm" />
     <Compile Include="PublishWebPackage.ps1" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
