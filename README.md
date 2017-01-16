@@ -47,6 +47,8 @@ The other options listed under "**Advanced**" are used to control the behavior o
 
 > If only "**Stop Before Deployment**" is checked you have to start your App manually later on.
 
+You can also make use of the "**App_Offline.htm**" behavior. You can specify a file which content will placed in the "**App_Offline.htm**" file on the target Web. If nothing is selected a file with default content will be used  
+
 ### DNX Tasks Build Nuget Package
 
 This task is used to create Nuget packages for one or multiple projects. For the fields "**Project Name**", "**Build Configuration**", "**Output Folder**" and "**Working Folder**" please have a look at the "**Build Web**" task.
@@ -98,10 +100,14 @@ Please have a look here: [GitHub Issues](https://github.com/kirkone/vsts-dnx-tas
 
 ### Release Notes
 
+#### Version 0.1.14
+
+- added support for App_Offline.htm in Web Publish Task  
+
 #### Version 0.1.13
 
 - Fixed bug in Build Web task: Errors and Warnings did not showed up in log  
-- 
+
 #### Version 0.1.12
 
 - Fixed bug in Build Web task that failed when the task had to build more than one project  
