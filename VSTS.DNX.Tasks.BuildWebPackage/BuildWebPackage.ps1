@@ -92,7 +92,7 @@ Function Main
         $buildWarnings.ForEach({
             if ($_ -ne [string]::IsNullOrWhiteSpace($_))
             {
-                Write-Host "##vso[task.logissue type=waring;]Warning: $_"
+                Write-Host "##vso[task.logissue type=warning;]Warning: $_"
             }
         })
         Write-Host " `n`r "
