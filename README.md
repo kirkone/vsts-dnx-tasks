@@ -100,6 +100,10 @@ Please have a look here: [GitHub Issues](https://github.com/kirkone/vsts-dnx-tas
 
 ### Release Notes
 
+#### Version 0.1.21
+
+- Fixed typo in Build Web Task that messed up warnings in log  
+
 #### Version 0.1.20
 
 - Fix for Publish Web not working in Release Management  
