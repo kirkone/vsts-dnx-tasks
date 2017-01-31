@@ -1,7 +1,18 @@
 ﻿[CmdletBinding(DefaultParameterSetName = 'None')]
 param (
     [String] [Parameter(Mandatory = $true)]
-    $AppName = ""
+    $ConnectedServiceName,
+    [String] [Parameter(Mandatory = $true)]
+    $WebAppName,
+    [String] [Parameter(Mandatory = $false)]
+    $DeployToSlotFlag,
+    [String] [Parameter(Mandatory = $false)]
+    $ResourceGroupName,
+    [String] [Parameter(Mandatory = $false)]
+    $SlotName,
+
+    [String] [Parameter(Mandatory = $true)]
+    $VirtualApplicationName
 )
 
 Write-Verbose "Entering script AddVirtualApp.ps1"
@@ -19,8 +30,8 @@ Function Main
 
     $newApp = @"
 {
-    "virtualPath": "/$AppName",
-    "physicalPath": "site\\$AppName",
+    "virtualPath": "/$VirtualApplicationName",
+    "physicalPath": "site\\$VirtualApplicationName",
     "preloadEnabled": false,
     "virtualDirectories": null
 }

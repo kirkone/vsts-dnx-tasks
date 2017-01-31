@@ -18,69 +18,94 @@
     "demands": [],
     "minimumAgentVersion": "1.99.5",
     "inputs": [
-        {
+{
             "name": "ConnectedServiceName",
-            "type": "connectedService:Azure",
-            "label": "Azure Classic Subscription",
+            "type": "connectedService:AzureRM",
+            "label": "Azure subscription",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Azure Classic subscription to configure before running PowerShell"
+            "helpMarkDown": "Select the Azure Resource Manager subscription."
         },
         {
-            "name": "WebSiteLocation",
+            "name": "WebAppName",
             "type": "pickList",
-            "label": "Web App Location",
+            "label": "App Service name",
             "defaultValue": "",
+            "required": true,
+            "properties": {
+                "EditableOptions": "True"
+            },
+            "helpMarkDown": "Enter or Select the name of an existing Azure App Service."
+        },
+        {
+            "name": "DeployToSlotFlag",
+            "type": "boolean",
+            "label": "Deploy to slot",
+            "defaultValue": "false",
             "required": false,
-            "helpMarkDown": "Select a region for deployment. Possible options are **East US**, **East US 2**, **Central US**, **South Central US**, **West US**, **North Europe**, **West Europe** and others.",
-            "properties": {
-                "EditableOptions": "True"
-            }
+            "helpMarkDown": "Select the option to deploy to an existing slot other than the Production slot. If this option is not selected, then the Azure App Service Production slot will be used."
         },
         {
-            "name": "WebSiteName",
+            "name": "ResourceGroupName",
             "type": "pickList",
-            "label": "Web App Name",
+            "label": "Resource group",
             "defaultValue": "",
             "required": true,
             "properties": {
                 "EditableOptions": "True"
-            }
+            },
+            "helpMarkDown": "Enter or Select the Azure Resource group that contains the Azure App Service specified above.",
+            "visibleRule": "DeployToSlotFlag = true"
         },
         {
-            "defaultValue": "",
-            "label": "Slot Name",
             "name": "SlotName",
+            "type": "pickList",
+            "label": "Slot",
+            "defaultValue": "",
             "required": true,
-            "type": "string"
+            "properties": {
+                "EditableOptions": "True"
+            },
+            "helpMarkDown": "Enter or Select an existing Slot other than the Production slot.",
+            "visibleRule": "DeployToSlotFlag = true"
         },
         {
+            "name": "VirtualApplicationName",
+            "type": "string",
+            "label": "Virtual application name",
             "defaultValue": "",
-            "helpMarkdown": "Name of the new Virtual Application.",
-            "label": "App Name",
-            "name": "AppName",
             "required": true,
-            "type": "string"
+            "helpMarkDown": "Specify the name of the Virtual application that will be created."
         }
     ],
     "dataSourceBindings": [
         {
-            "target": "WebSiteName",
+            "target": "WebAppName",
             "endpointId": "$(ConnectedServiceName)",
-            "dataSourceName": "AzureWebSiteNames",
+            "dataSourceName": "AzureRMWebAppNames"
+        },
+        {
+            "target": "ResourceGroupName",
+            "endpointId": "$(ConnectedServiceName)",
+            "dataSourceName": "AzureRMWebAppResourceGroup",
             "parameters": {
-                "WebSiteLocation": "$(WebSiteLocation)"
+                "WebAppName": "$(WebAppName)"
             }
         },
         {
-            "target": "WebSiteLocation",
+            "target": "SlotName",
             "endpointId": "$(ConnectedServiceName)",
-            "dataSourceName": "AzureLocations"
+            "dataSourceName": "AzureRMWebAppSlotsId",
+            "parameters": {
+                "WebAppName": "$(WebAppName)",
+                "ResourceGroupName": "$(ResourceGroupName)"
+            },
+            "resultTemplate": "{\"Value\":\"{{{ #extractResource slots}}}\",\"DisplayValue\":\"{{{ #extractResource slots}}}\"}"
         }
     ],
     "instanceNameFormat": "Add Virtual App: $(AppName)",
     "execution": {
-        "PowerShell": {
+        "AzurePowerShell": {
             "target": "$(currentDirectory)\\AddVirtualApp.ps1",
             "argumentFormat": "",
             "workingDirectory": "$(WorkingFolder)"
