@@ -9,6 +9,7 @@ This extension includes the following tasks:
 - DNX Tasks Azure SlotSwap
 - DNX Tasks Clear NuGet Cache
 - DNX Tasks Generate Change Log
+- DNX Tasks Add Virtual Application
 
 ### DNX Tasks Build Web
 
@@ -94,11 +95,19 @@ To get this task working script access for the OAuth token has to be enabled. To
 
 > This task only writes a file. You have to take care of it by your self. For example add it to your build output.
 
+### DNX Tasks Add Virtual Application
+
+This task can be used to add a Virtual Application to an already existing Azure web app. If there is no "**Virtual Application**" with the given name this script will create one, otherwise nothing happens.  
+
 ### Questions, Recommendations, Issues?
 
 Please have a look here: [GitHub Issues](https://github.com/kirkone/vsts-dnx-tasks/issues)  
 
 ### Release Notes
+
+#### Version 0.1.22
+
+- Added "Add Virtual Application" Task
 
 #### Version 0.1.21
 
