@@ -58,6 +58,16 @@
     },
     "files": [
         {
+            "path": "VSTS.DNX.Tasks.AddVirtualApp/AddVirtualApp.ps1"
+        },
+        {
+            "path": "VSTS.DNX.Tasks.AddVirtualApp/task.json"
+        },
+        {
+            "path": "VSTS.DNX.Tasks.AddVirtualApp/icon.png"
+        },
+
+        {
             "path": "VSTS.DNX.Tasks.BuildWebPackage/BuildWebPackage.ps1"
         },
         {
@@ -137,6 +147,17 @@
         }
     ],
     "contributions": [
+        {
+            "id": "VSTS.DNX.Tasks.AddVirtualApp",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "VSTS.DNX.Tasks.AddVirtualApp"
+            }
+        },
+
         {
             "id": "VSTS.DNX.Tasks.BuildWebPackage",
             "type": "ms.vss-distributed-task.task",

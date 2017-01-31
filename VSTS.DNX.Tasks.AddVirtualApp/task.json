@@ -1,0 +1,89 @@
+{
+    "id": "18E7AF2F-A100-4868-9C88-BB3A07B3B3BE",
+    "name": "DNX.Tasks.AddVirtualApp",
+    "friendlyName": "DNX Tasks Add Virtual Application",
+    "description": "Add a virtual application to an existing Azure web App",
+    "helpMarkDown": "Version: 0.1.21",
+    "category": "Deploy",
+    "author": "Kirsten Kluge",
+    "version": {
+        "Major": 0,
+        "Minor": 1,
+        "Patch": 21
+    },
+    "visibility": [
+        "Build",
+        "Release"
+    ],
+    "demands": [],
+    "minimumAgentVersion": "1.99.5",
+    "inputs": [
+        {
+            "name": "ConnectedServiceName",
+            "type": "connectedService:Azure",
+            "label": "Azure Classic Subscription",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Azure Classic subscription to configure before running PowerShell"
+        },
+        {
+            "name": "WebSiteLocation",
+            "type": "pickList",
+            "label": "Web App Location",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Select a region for deployment. Possible options are **East US**, **East US 2**, **Central US**, **South Central US**, **West US**, **North Europe**, **West Europe** and others.",
+            "properties": {
+                "EditableOptions": "True"
+            }
+        },
+        {
+            "name": "WebSiteName",
+            "type": "pickList",
+            "label": "Web App Name",
+            "defaultValue": "",
+            "required": true,
+            "properties": {
+                "EditableOptions": "True"
+            }
+        },
+        {
+            "defaultValue": "",
+            "label": "Slot Name",
+            "name": "SlotName",
+            "required": true,
+            "type": "string"
+        },
+        {
+            "defaultValue": "",
+            "helpMarkdown": "Name of the new Virtual Application.",
+            "label": "App Name",
+            "name": "AppName",
+            "required": true,
+            "type": "string"
+        }
+    ],
+    "dataSourceBindings": [
+        {
+            "target": "WebSiteName",
+            "endpointId": "$(ConnectedServiceName)",
+            "dataSourceName": "AzureWebSiteNames",
+            "parameters": {
+                "WebSiteLocation": "$(WebSiteLocation)"
+            }
+        },
+        {
+            "target": "WebSiteLocation",
+            "endpointId": "$(ConnectedServiceName)",
+            "dataSourceName": "AzureLocations"
+        }
+    ],
+    "instanceNameFormat": "Add Virtual App: $(AppName)",
+    "execution": {
+        "PowerShell": {
+            "target": "$(currentDirectory)\\AddVirtualApp.ps1",
+            "argumentFormat": "",
+            "workingDirectory": "$(WorkingFolder)"
+        }
+    }
+}
