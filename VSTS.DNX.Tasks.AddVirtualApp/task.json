@@ -107,7 +107,7 @@
             "resultTemplate": "{\"Value\":\"{{{ #extractResource slots}}}\",\"DisplayValue\":\"{{{ #extractResource slots}}}\"}"
         }
     ],
-    "instanceNameFormat": "Add Virtual App: $(AppName)",
+    "instanceNameFormat": "Add Virtual App: $(VirtualApplicationName)",
     "execution": {
         "AzurePowerShell": {
             "target": "$(currentDirectory)\\AddVirtualApp.ps1",
