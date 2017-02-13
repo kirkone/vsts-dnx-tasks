@@ -3,13 +3,13 @@
     "name": "DNX.Tasks.AddVirtualApp",
     "friendlyName": "DNX Tasks Add Virtual Application",
     "description": "Add a virtual application to an existing Azure web App",
-    "helpMarkDown": "Version: 0.1.23",
+    "helpMarkDown": "Version: 0.1.24",
     "category": "Deploy",
     "author": "Kirsten Kluge",
     "version": {
         "Major": 0,
         "Minor": 1,
-        "Patch": 23
+        "Patch": 24
     },
     "preview": "true",
     "visibility": [
