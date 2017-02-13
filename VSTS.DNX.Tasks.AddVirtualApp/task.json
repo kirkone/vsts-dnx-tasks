@@ -112,7 +112,7 @@
         "AzurePowerShell": {
             "target": "$(currentDirectory)\\AddVirtualApp.ps1",
             "argumentFormat": "",
-            "workingDirectory": "$(WorkingFolder)"
+            "workingDirectory": "$(currentDirectory)"
         }
     }
 }
