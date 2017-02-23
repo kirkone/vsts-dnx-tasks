@@ -89,25 +89,29 @@ Function Main
     if ($buildWarnings.Count -gt 0)
     {
         Write-Host "    Warnings:`n`r "
-        $buildWarnings.ForEach({
-            if ($_ -ne [string]::IsNullOrWhiteSpace($_))
+        foreach($warning in $buildWarnings)
+        {
+            if ($warning -ne [string]::IsNullOrWhiteSpace($warning))
             {
-                Write-Host "##vso[task.logissue type=warning;]Warning: $_"
+                Write-Host "##vso[task.logissue type=warning;]Warning: $warning"
             }
-        })
+        }
+
         Write-Host " `n`r "
     }
 
     if ($buildErrors.Count -gt 0)
     {
         Write-Host "    Errors:`n`r "
-        $buildErrors.ForEach({
-            if ($_ -ne [string]::IsNullOrWhiteSpace($_) -and
-                -not ($_ -like "*dotnet-compile.rsp returned Exit Code 1*"))
+        foreach($error in $buildErrors)
+        {
+            if ($error -ne [string]::IsNullOrWhiteSpace($error) -and
+                -not ($error -like "*dotnet-compile.rsp returned Exit Code 1*"))
             {
-                Write-Host "##vso[task.logissue type=error;]Error: $_"
+                Write-Host "##vso[task.logissue type=error;]Error: $error"
             }
-        })
+        }
+        
         Write-Host "##vso[task.complete result=Failed;]Build Failed!"
         Write-Host "    Build Failed!`n`r "
         Write-Host " "
@@ -131,24 +135,28 @@ Function Main
         if ($publishWarnings.Count -gt 0)
         {
             Write-Host "    Warnings:`n`r "
-            $publishWarnings.ForEach({
-                if ($_ -ne [string]::IsNullOrWhiteSpace($_))
+            foreach($warning in $publishWarnings)
+            {
+                if ($warning -ne [string]::IsNullOrWhiteSpace($warning))
                 {
-                    Write-Host "##vso[task.logissue type=warning;]Warning: $_"
+                    Write-Host "##vso[task.logissue type=warning;]Warning: $warning"
                 }
-            })
+            }
+            
             Write-Host " `n`r "
         }
 
         if ($publishErrors.Count -gt 0)
         {
             Write-Host "    Errors:`n`r "
-            $publishErrors.ForEach({
-                if ($_ -ne [string]::IsNullOrWhiteSpace($_))
+            foreach($error in $publishErrors)
+            {
+                if ($error -ne [string]::IsNullOrWhiteSpace($error))
                 {
-                    Write-Host "##vso[task.logissue type=error;]Error: $_"
+                    Write-Host "##vso[task.logissue type=error;]Error: $error"
                 }
-            })
+            }
+            
             Write-Host "##vso[task.complete result=Failed;]Publish Failed!"
             Write-Host "    Publish Failed!`n`r "
             Write-Host " "
