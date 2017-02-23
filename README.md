@@ -105,6 +105,10 @@ Please have a look here: [GitHub Issues](https://github.com/kirkone/vsts-dnx-tas
 
 ### Release Notes
 
+#### Version 0.1.25
+
+- Fixed [Issue 23](https://github.com/kirkone/vsts-dnx-tasks/issues/23) Thanks to Tankatronic
+
 #### Version 0.1.24
 
 - Fixed an error in the "Add Virtual Application" Task

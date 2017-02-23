@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "vsts-dnx-tasks",
     "name": "VSTS DNX Tasks",
-    "version": "0.1.24",
+    "version": "0.1.25",
     "publisher": "kirkone",
     "public": true,
     "targets": [
