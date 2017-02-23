@@ -73,6 +73,12 @@ Function Main
         return
     }
 
+    if (Test-Path $env:BUILD_SOURCESDIRECTORY\..\Nuget\newNuget.config)
+    {
+        Write-Output "NuGet Installer step detected. Copying new Nuget.config."
+        Copy $env:BUILD_SOURCESDIRECTORY\..\Nuget\newNuget.config  $env:APPDATA\Nuget\Nuget.config
+    }
+
     Write-Output "$($projects.Count) Projects to build"
 
     Write-Output "dotnet restore for:"
