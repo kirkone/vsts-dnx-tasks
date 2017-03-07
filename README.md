@@ -25,7 +25,7 @@ Under the "**Advanced**" group you can decide if you want the source code to be 
 Also the "**Working Folder**" can be specified here. Usual this should be the folder where your .sln file is.  
 The field "**Source Folder**" is used to specify a subfolder where your projects are located. The default value is "src" like in a standard asp.net core project. If your project folders are direct in your "**Working Folder**" leave this field blank.  
 
-The Task will look in "**Working folder**/**Source Folder**/**Project Name**" for a project.json and starts building this project.  
+The Task will look in "**Working folder**/**Source Folder**/**Project Name**" for a project.json or a *.csproj and starts building this project.  
 
 This task will fail when no project can be found in the specified location.  
 
@@ -104,6 +104,12 @@ This task can be used to add a Virtual Application to an already existing Azure 
 Please have a look here: [GitHub Issues](https://github.com/kirkone/vsts-dnx-tasks/issues)  
 
 ### Release Notes
+
+#### Version 0.1.26
+
+- Fix for dotnet Tooling 1.0
+  - added suport for *.csproj
+  - added same Error handling to the nuget Task as in the Build Task 
 
 #### Version 0.1.25
 

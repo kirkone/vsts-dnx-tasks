@@ -52,7 +52,10 @@ Function Main
     if([string]::IsNullOrWhiteSpace($ProjectName) -Or $projects.Count -eq 0 )
     {
         Write-Host "No Projects specified, build all..."
-        $projects = dir -Path "$SourceFolder*\*" -Filter project.json | % {
+        $projects = Get-ChildItem -Path "$SourceFolder*\*" -Filter *.csproj | ForEach-Object {
+            $_.Directory.Name
+        } | & {$input}
+        $projects += Get-ChildItem -Path "$SourceFolder*\*" -Filter project.json | ForEach-Object {
             $_.Directory.Name
         } | & {$input}
     }
@@ -65,6 +68,7 @@ Function Main
     }
 
     Write-Host "    $($projects.Count) Projects to build`n`r "
+
 
     $projectList = $projects | % {"""$SourceFolder$($_.Trim('"'))""" } | & {"$input"}
     Write-Host "dotnet restore for:"
@@ -83,8 +87,8 @@ Function Main
     Write-Host "    $($projectList -split(" ") | % { "$_" })`n`r "
     Invoke-Expression "& dotnet build $projectList -c $BuildConfiguration --no-incremental" 2>&1 -ErrorVariable buildIssues | Format-Console
 
-    $buildWarnings = $buildIssues|where{$_ -like "*: warning *"}
-    $buildErrors = $buildIssues|where{$_ -like "*: error *"}
+    $buildWarnings = $buildIssues | Where-Object {$_ -like "*: warning *"}
+    $buildErrors = $buildIssues | Where-Object {$_ -like "*: error *"}
 
     if ($buildWarnings.Count -gt 0)
     {
@@ -129,8 +133,8 @@ Function Main
         Write-Host "    ""$p""`n`r "
         Invoke-Expression "& dotnet publish $p -c $BuildConfiguration -o ""$OutputFolder\$outDir"" --no-build " 2>&1 -ErrorVariable publishIssues | Format-Console
 
-        $publishWarnings = $publishIssues|where{$_ -like "*: warning *"}
-        $publishErrors = $publishIssues|where{$_ -like "*: error *"}
+        $publishWarnings = $publishIssues | Where-Object {$_ -like "*: warning *"}
+        $publishErrors = $publishIssues | Where-Object {$_ -like "*: error *"}
 
         if ($publishWarnings.Count -gt 0)
         {
