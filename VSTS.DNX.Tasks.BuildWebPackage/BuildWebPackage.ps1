@@ -115,7 +115,7 @@ Function Main
                 Write-Host "##vso[task.logissue type=error;]Error: $error"
             }
         }
-        
+
         Write-Host "##vso[task.complete result=Failed;]Build Failed!"
         Write-Host "    Build Failed!`n`r "
         Write-Host " "
@@ -131,7 +131,7 @@ Function Main
         $outDir = (Get-Item $p).Name
         Write-Host "dotnet publish for:"
         Write-Host "    ""$p""`n`r "
-        Invoke-Expression "& dotnet publish $p -c $BuildConfiguration -o ""$OutputFolder\$outDir"" --no-build " 2>&1 -ErrorVariable publishIssues | Format-Console
+        Invoke-Expression "& dotnet publish $p -c $BuildConfiguration -o ""$OutputFolder\$outDir""" 2>&1 -ErrorVariable publishIssues | Format-Console
 
         $publishWarnings = $publishIssues | Where-Object {$_ -like "*: warning *"}
         $publishErrors = $publishIssues | Where-Object {$_ -like "*: error *"}
@@ -146,7 +146,7 @@ Function Main
                     Write-Host "##vso[task.logissue type=warning;]Warning: $warning"
                 }
             }
-            
+
             Write-Host " `n`r "
         }
 
@@ -160,7 +160,7 @@ Function Main
                     Write-Host "##vso[task.logissue type=error;]Error: $error"
                 }
             }
-            
+
             Write-Host "##vso[task.complete result=Failed;]Publish Failed!"
             Write-Host "    Publish Failed!`n`r "
             Write-Host " "
