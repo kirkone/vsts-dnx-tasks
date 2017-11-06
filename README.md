@@ -105,6 +105,10 @@ Please have a look here: [GitHub Issues](https://github.com/kirkone/vsts-dnx-tas
 
 ### Release Notes
 
+#### Version 0.1.30
+
+- Lowered minimum agent version to 1.95.4 for TFS 2015 support
+
 #### Version 0.1.27
 
 - Fixed Build Webpackage error on publish

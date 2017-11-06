@@ -3,19 +3,19 @@
     "name": "DNX.Tasks.BuildNugetPackage",
     "friendlyName": "DNX Tasks Build Nuget Package",
     "description": "Build a Nuget package with dotnet cli.",
-    "helpMarkDown": "Version: 0.1.24",
+    "helpMarkDown": "Version: 0.1.30",
     "category": "Build",
     "author": "Kirsten Kluge",
     "version": {
         "Major": 0,
         "Minor": 1,
-        "Patch": 24
+        "Patch": 30
     },
     "visibility": [
         "Build"
     ],
-    "demands": [ ],
-    "minimumAgentVersion": "1.99.0",
+    "demands": [],
+    "minimumAgentVersion": "1.95.4",
     "groups": [
         {
             "name": "advanced",
