@@ -1,5 +1,7 @@
 # VSTS DNX Tasks
 
+[![Visual Studio Marketplace](https://img.shields.io/vscode-marketplace/v/KirKone.vsts-dnx-tasks.svg)](https://marketplace.visualstudio.com/items?itemName=KirKone.vsts-dnx-tasks)
+
 This extension allows you to make builds with the new ASP.NET Core tools easier.  
 This extension includes the following tasks:
 
